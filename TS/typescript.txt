@@ -1,0 +1,9 @@
+Differnce between typescript and Javscript
+
+TypeScript code needs to complie where JavaScript code doesnt. 
+
+TypeScript always points out the compilation errors at the time of development (pre-compilation). Because of this getting runtime errors is less likely, whereas JavaScript is an interpreted language.
+
+TypeScript supports static/strong typing. This means that type correctness can be checked at compile time. This feature is not available in JavaScript.
+
+TypeScript use types,interface,Type Annotations, to describe data been used while JavaScript doesnt

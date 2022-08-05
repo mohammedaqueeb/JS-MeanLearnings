@@ -1,0 +1,12 @@
+ng-container
+
+ng-container serves as a container for elements which can also accept structural directives but is not rendered to the DOM,
+
+What is ng-container ? ng-container allows us to create a division or section in a template without introducing a new HTML element. The ng-container does not render in the DOM, but content inside it is rendered. ng-container is not a directive, component, class, or interface, but just a syntax element.
+
+
+ng-template
+
+ng-template is an Angular element that is used for rendering HTML in a template. However, it is not rendered directly on DOM. If you include an ng-template tag to a template, the tag and the content inside it will be replaced by comment upon render.
+
+while ng-template allows you to create template content that is not rendered until you specifically (conditionally or directly) add it to the DOM.

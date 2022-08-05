@@ -1,0 +1,26 @@
+1. Define z-index.
+
+This is one of the most frequently asked CSS interview questions. Z-index is used to specify the stack order of elements that overlap each other. Its default value is zero and can take both negative and positive values. A higher z-index value is stacked above the lower index element. It takes the following values- auto, number, initial, and inherit. 
+
+2. Name different ways to position some aspects in CSS. 
+
+The positioning property specifies the positioning method type. The five different position values are fixed, static, absolute, sticky, and relative. The elements are positioned using top, left, right, and bottom properties. These properties need to be set first, and they work depending on position value. 
+
+3. Tell us something about CSS3.
+
+CSS3 is divided into modules and is supported by almost every browser. Many graphics-related characteristics are introduced in CSS3 like box-shadow, Border-radius, and flexbox. A user can create precise multiple background images using properties like background-position, background-repeat, and background-image styles. 
+
+4. What are the properties of flexbox?
+
+The properties of flexbox are flex-direction, wrap, flow, content, and align-items, and content. 
+
+5. Css position https://developer.mozilla.org/en-US/docs/Web/CSS/position
+ 
+1. 
+1. 
+1. 
+1.
+1. 
+1. 
+1. 
+1. 
