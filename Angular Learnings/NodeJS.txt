@@ -1,0 +1,74 @@
+https://gist.github.com/paulfranco/9f88a2879b7b7d88de5d1921aef2093b
+https://github.com/Mohamed-Hashem/nodejs-interview-questions
+
+
+What do you mean by Asynchronous API? 
+	All APIs of Node.js library are aynchronous that is non-blocking. It essentially means a Node.js based server never waits for a API to return data. Server moves to next API after calling it and a notification mechanism of Events of Node.js helps server to get response from the previous API call.
+	
+What are the benefits of using Node.js
+
+	Aynchronous and Event Driven - All APIs of Node.js library are aynchronous that is non-blocking. It essentially means a Node.js based server never waits for a API to return data. Server moves to next API after calling it and a notification mechanism of Events of Node.js helps server to get response from the previous API call.
+	
+	Very Fast - Being built on Google Chrome's V8 JavaScript Engine, Node.js library is very fast in code execution.
+	
+	Single Threaded but highly Scalable - Node.js uses a single threaded model with event looping. Event mechanism helps server to respond in a non-bloking ways and makes server highly scalable as opposed to traditional servers which create limited threads to handle requests. Node.js uses a single threaded program and same program can services much larger number of requests than traditional server like Apache HTTP Server.
+	
+	Node.js library uses JavaScript – This is another important aspect of Node.js from the developer’s point of view. The majority of developers are already well-versed in JavaScript. Hence, development in Node.js becomes easier for a developer who knows JavaScript.
+	
+	There is an Active and vibrant community for the Node.js framework – The active community always keeps the framework updated with the latest trends in the web development.
+
+	No Buffering - Node.js applications never buffer any data. These applications simply output the data in chunks.
+	
+
+Is Node a single threaded application
+	Yes! Node uses a single threaded model with event looping.
+
+
+What is an error-first callback?
+	Error-first callbacks are used to pass errors and data. The first argument is always an error object that the programmer has to check if something went wrong. Additional arguments are used to pass data.
+
+	fs.readFile(filePath, function(err, data) {
+	  if (err) {
+		//handle the error
+	  }
+	  // use the data object
+	});
+
+
+What's the difference between operational and programmer errors? ☆☆
+	Operation errors are not bugs, but problems with the system, like request timeout or hardware failure. On the other hand programmer errors are actual bugs.
+	
+	
+How to make Post request in Node.js? ☆☆
+	Following code snippet can be used to make a Post Request in Node.js.
+
+	var request = require('request');
+	request.post('http://www.example.com/action', {
+	  form: {
+		key: 'value'
+	  }
+	}, function(error, response, body) {
+	  if (!error && response.statusCode == 200) {
+		console.log(body)
+	  }
+	});
+	
+	
+What are Event Listeners? ☆☆
+	Event Listeners are similar to call back functions but are associated with some event. For example when a server listens to http request on a given port a event will be generated and to specify http server has received and will invoke corresponding event listener. Basically, Event listener's are also call backs for a corresponding event.
+
+	Node.js has built in event's and built in event listeners. Node.js also provides functionality to create Custom events and Custom Event listeners.
+	
+	
+What is V8? ☆☆
+	The V8 library provides Node.js with a JavaScript engine (a program that converts Javascript code into lower level or machine code that microprocessors can understand), which Node.js controls via the V8 C++ API. V8 is maintained by Google, for use in Chrome.
+
+	The Chrome V8 engine :
+
+	The V8 engine is written in C++ and used in Chrome and Nodejs.
+	It implements ECMAScript as specified in ECMA-262.
+	The V8 engine can run standalone we can embed it with our own C++ program.
+	
+	
+What is libuv? ☆☆
+	libuv is a C library that is used to abstract non-blocking I/O operations to a consistent interface across all supported platforms. It provides mechanisms to handle file system, DNS, network, child processes, pipes, signal handling, polling and streaming. It also includes a thread pool for offloading work for some things that can't be done asynchronously at the operating system level.

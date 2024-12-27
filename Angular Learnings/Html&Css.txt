@@ -1,0 +1,135 @@
+CSS
+
+What is the Box model in CSS?
+	-A rectangle box is wrapped around every HTML element. The box model is used to determine the height and width of the rectangular box.
+	-The CSS Box consists of Width and height (or in the absence of that, default values and the content inside), padding, borders, margin.
+
+different types of Selectors in CSS
+	1)Universal Selector  -> * { }
+	2)Element Type Selector -> ul{ }
+	3)ID Selector -> #headers{ }
+	4)Class Selector -> .box { }
+
+What is the difference between inline, inline-block, and block?
+	Block Element: The block elements always start on a new line. They will also take space for an entire row or width. List of block elements are <div>, <p>.
+	Inline Elements: Inline elements don't start on a new line, they appear on the same line as the content and tags beside them. Some examples of inline elements are <a>, <span> , <strong>, and <img> tags. 
+	Inline Block Elements: Inline-block elements are similar to inline elements, except they can have padding and margins and set height and width values
+
+What are Pseudo elements and Pseudo classes
+	Pseudo-classes and pseudo-elements are CSS keywords that are used to style and target specific parts of an element or an element's state:
+	
+	Pseudo-classes
+	Target an element based on its state, such as when a user hovers over or clicks on an element. For example, you can use pseudo-classes to style an element when it's active, disabled, or in focus. The syntax for pseudo-classes is a single colon (:).
+	
+	Pseudo-elements
+	Target a specific part of an element, such as the first letter or line of an element. For example, you can use pseudo-elements to insert content before or after an element. The syntax for pseudo-elements is a double colon (::).
+
+Opacity :-
+	Opacity refers to the degree to which the content is transparent or opaque.
+	We can use the property named opacity which takes the values ranging from 0 to 1. 0 specifies that the element is completely transparent where 1 means that the element is completely opaque.
+	
+Z-index
+	z-index is the CSS property that controls the stacking order of overlapping elements on a page. An element with a higher z-index value will appear in front of an element with a lower z-index value. The property is called “z-index” because it sets the order of elements along the z-axis.
+	
+Position
+
+	The element is positioned according to the normal flow of the document, and then offset relative to itself based on the values of top, right, bottom, and left. The offset does not affect the position of any other elements; thus, the space given for the element in the page layout is the same as if position were static.
+
+	This value creates a new stacking context when the value of z-index is not auto. Its effect on table-*-group, table-row, table-column, table-cell, and table-caption elements is undefined.
+
+	absolute
+	The element is removed from the normal document flow, and no space is created for the element in the page layout. The element is positioned relative to its closest positioned ancestor (if any) or to the initial containing block. Its final position is determined by the values of top, right, bottom, and left.
+
+	This value creates a new stacking context when the value of z-index is not auto. The margins of absolutely positioned boxes do not collapse with other margins.
+
+	fixed
+	The element is removed from the normal document flow, and no space is created for the element in the page layout. The element is positioned relative to its initial containing block, which is the viewport in the case of visual media. Its final position is determined by the values of top, right, bottom, and left.
+
+	This value always creates a new stacking context. In printed documents, the element is placed in the same position on every page.
+
+	sticky
+	The element is positioned according to the normal flow of the document, and then offset relative to its nearest scrolling ancestor and containing block (nearest block-level ancestor), including table-related elements, based on the values of top, right, bottom, and left. The offset does not affect the position of any other elements.
+
+	This value always creates a new stacking context. Note that a sticky element "sticks" to its nearest ancestor that has a "scrolling mechanism" (created when overflow is hidden, scroll, auto, or overlay), even if that ancestor isn't the nearest actually scrolling ancestor.
+
+
+CSS Flexbox
+	CSS Flexbox, short for Flexible Box Layout, offers a streamlined way to design adaptable and visually appealing layouts. It works primarily in one dimension (row or column) to intelligently distribute space among elements within a container, resulting in clean alignment and responsive designs suitable for various screen sizes. Flexbox is perfect for crafting both smaller components and overall webpage structures.
+
+	
+	Before the Flexbox Model:
+		Block: Sections in web pages
+		Inline: Text
+		Table: Two-dimensional table data
+		Positioned: Explicit position of an element
+	Flexbox Components:
+		Flex Container: The parent div containing various divisions.
+		Flex Items: The items inside the container div.
+	
+Display flex
+	https://www.geeksforgeeks.org/introduction-to-css-flexbox/
+
+
+Responsive websites
+
+
+
+---------------------------- html  ------------------------------------------
+
+
+
+1) new features of html 5 
+	Semantic Elements
+	Audio and Video Support
+	Canvas 
+	Local Storage
+	
+what is DOCTYPE
+	DOCTYPE, or document type declaration, is a set of instructions that tells a web browser or email client what version of HTML or XML a document is written in
+
+
+how to declare html version 4 in html page 
+	
+
+
+what is HTML Web Storage API
+	HTML web storage provides two objects for storing data on the client: 
+		window.localStorage - stores data with no expiration date. 
+		window.sessionStorage - stores data for one session (data is lost when the browser tab is closed)
+
+
+what is MetaData
+	The <meta> tag defines metadata about an HTML document. Metadata is data (information) about data. <meta> tags always go inside the <head> element, and are typically used to specify character set, page description, keywords, author of the document, and viewport settings.
+
+why semantic elements introduced
+	Semantic elements in HTML were introduced to improve the accessibility, readability, and maintainability of web pages: 
+	
+	Semantic elements make web pages easier to read. 
+	
+	Semantic elements improve the maintainability of HTML code. 
+	
+	Semantic elements help search engines determine the importance and context of web pages. 
+	
+	Semantic elements enhance the user experience for all visitors. 
+	
+	A Guide to Semantic Tags in HTML - Shiksha Online
+	Semantic elements provide a structured and meaningful way to describe content. For example, the strong element indicates strong importance, not bold. 
+
+how to create 24 bit grid in bootstrap
+
+	Unfortunately, there is no customization tool in Bootstrap 4 so custom build is a necessary step.
+
+	But don't worry, it's quite easy.
+
+	Follow instructions from this answer - https://stackoverflow.com/a/47251052/1614120 (you'll need Node.js installed)
+	Put following code in the name.scss (file mentioned in 5th step):
+	name.scss
+
+	@import "bootstrap/scss/functions";
+	@import "bootstrap/scss/variables";
+	@import "bootstrap/scss/mixins";
+
+	// Set this value to 16, 24, etc. depending on how many columns you need.
+	$grid-columns: 24;
+
+	@import "bootstrap/scss/grid";

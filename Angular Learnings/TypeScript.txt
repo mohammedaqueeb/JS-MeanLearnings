@@ -1,0 +1,137 @@
+What is TypeScript?
+
+	TypeScript is an open-source, object-oriented programming language developed and maintained by Microsoft Corporation. It is a Strict Super Set of JavaScript, which means anything implemented in JavaScript can be implemented using TypeScript along with adding enhanced features (every existing JavaScript Code is a valid TypeScript Code). As TypeScript code is converted to JavaScript code it makes it easier to integrate into JavaScript projects. It is designed mainly for large-scale projects.
+	
+	Key Features of TypeScript
+	
+	Static Type Checking (Optional)
+	TypeScript allows you to check and assign types to variables, parameters, and function return values. While this step requires a little more effort, it significantly improves code quality. Optional static typing helps prevent bugs and makes your code more readable.
+	
+	Class-Based Objects
+	One of TypeScript’s standout features is its support for classes. Unlike JavaScript’s prototype-based approach, TypeScript lets you write true object-oriented code. You can create classes, define constructors, and use inheritance and access modifiers (public, private, protected).
+
+	Modularity
+	TypeScript promotes modularity. By using modules, you can organize your code into smaller, reusable pieces. This modularity enhances maintainability and collaboration among team members.
+
+	ES6 Features
+	TypeScript embraces ECMAScript 6 (ES6) features. If you’re familiar with ES6 syntax (arrow functions, template literals, destructuring, etc.), you’ll feel right at home with TypeScript.
+
+	Syntactical Sugaring
+	TypeScript’s syntax is closer to that of high-level languages like Java. It’s like a sweetener for developers—more concise and expressive.
+
+	
+What is tsconfig.json file?
+
+	A tsconfig.json file is a JSON object that specifies how the TypeScript compiler processes code in a project. It's usually placed in the root directory of a TypeScript project and contains properties that define the project settings and compiler options. 
+	
+	Some of the properties in a tsconfig.json file include:
+	compilerOptions
+	target: Specifies the ECMAScript target version for the emitted JavaScript
+	module: Defines the module system to use
+	outDir: Specifies the output directory for compiled JavaScript files 
+
+What are Interfaces in TypeScript
+
+	Interfaces are a feature of TypeScript that allows us to define the structure or shape of an object and specify the properties and methods that an object has or should have. Their primary function is type checking and aiding developers in catching type-related errors during development.
+	
+	
+union type in typescript
+
+	Union types are used when a value can be more than a single type.
+
+	Such as when a property would be string or number.
+	
+	Union | (OR)
+	Using the | we are saying our parameter is a string or number:
+
+
+What is void, and when to use the void type?
+	The void type in TypeScript represents the absence of a return value for functions. It indicates that a function does not return any value, ensuring that the function's purpose is solely to act without returning data.
+	
+
+How to specify optional properties in TypeScript?
+	using ? we can define optional properties
+
+What is an unknown type, and when to use it in TypeScript?
+
+Explain the concept of null and its use in TypeScript.
+	Null refers to a value that is either empty or a value that doesn't exist. It's on purpose that there's no value here. T
+	
+What is TsLint & EsLint 
+
+	ESLint and TSLint are both static code analysis tools that help developers identify and fix issues in their code. However, there are several key differences between the two:
+
+	JavaScript vs TypeScript: The most significant difference between ESLint and TSLint is the language they support. ESLint is designed for JavaScript, while TSLint is specifically tailored for TypeScript. Although ESLint can analyze TypeScript code to some extent, TSLint provides more comprehensive analysis and enforcement for TypeScript-specific features.
+
+	Extensibility: ESLint has a more mature and extensive ecosystem of plugins and rules, making it highly customizable and adaptable to different project requirements. On the other hand, TSLint has a more limited range of available rules and plugins, as it is primarily focused on TypeScript-specific checks.
+
+	Integration: ESLint has better integration with popular code editors and build tools, making it easier to incorporate into different development workflows. TSLint, on the other hand, may require additional configuration and setup to work seamlessly with certain tools and editors.
+
+	Rules and checks: While both ESLint and TSLint provide a wide range of default rules and checks, their specific implementations and configurations differ. ESLint focuses on enforcing best practices, code style guidelines, and possible errors, while TSLint offers additional checks specific to TypeScript language features and design patterns.
+
+	Migration to ESLint: The TypeScript team officially recommends migrating from TSLint to ESLint for TypeScript projects. This migration involves configuring ESLint with TypeScript-specific plugins and rules to replicate the checks performed by TSLint. The migration process ensures a smoother transition for projects and ensures compatibility with future TypeScript language updates.
+
+What is undefined in TypeScript?
+	The value 'undefined' denotes that a variable has been declared, but hasn't been assigned any value. So, the value of the variable is 'undefined'.
+
+	On the other hand, 'null' refers to a non-existent object, which basically means 'empty' or 'nothing'.
+
+Explain the purpose of the never type in TypeScript.
+	The never type represents the type of values that never occur. For instance, never is the return type for a function expression or an arrow function expression that always throws an exception or one that never returns
+	
+
+
+
+What is meant by type inference?
+	Type inference is a process that automatically assigns types to expressions in a program based on the program's structure and context. It can be used to assign types to variables, constants, and functions. 
+	
+	Type inference can be done at compile time or runtime, depending on the language. The goal is to detect any violations of type rules and report them during compilation. 
+	
+	Type inference can be used in programming languages, mathematical type systems, and even natural languages in some branches of linguistics and computer science. Some languages that use type inference include:
+
+Explain the various ways to control member visibility in TypeScript.
+
+	public
+	By default, all members of a class in TypeScript are public. All the public members can be accessed anywhere without any restrictions.
+	
+	private
+	The private access modifier ensures that class members are visible only to that class and are not accessible outside the containing class.
+	
+	protected
+	The protected access modifier is similar to the private access modifier, except that protected members can be accessed using their deriving classes.
+
+
+What is tupple
+	
+	A tuple is a type in TypeScript that is used to represent an array in which the type of a fixed number of elements is known, but not for all the elements. It provides a way to represent the ordered set of the element types for certain elements in a TypeScript array. A tuple always has a fixed number of elements and each one of them has their types associated with them.
+	
+	Tuples can contain one or more types of data (e.g., numbers and strings)
+	
+	let arrTuple: [number, string, number, string] = [501, "welcome", 505, "Mohan"];
+	
+	console.log(arrTuple);
+
+Data Types in TypeScript
+
+	Number : It is used to represent both Integer as well as Floating-Point numbers
+	Boolean : Represents true and false
+	String	: It is used to represent a sequence of characters
+	Void : Generally used on function return-types
+	Null : It is used when an object does not have any value
+	Undefined : Denotes value given to uninitialized variable
+	Any : If a variable is declared with any data type then any type of value can be assigned to that variable
+
+
+What are intersection types?
+	https://www.geeksforgeeks.org/what-are-intersection-types-in-typescript/
+	
+	
+What are type assertions in TypeScript?
+	https://www.geeksforgeeks.org/explain-type-assertions-in-typescript/
+	
+	
+Explain how enums work in TypeScript?
+	https://www.geeksforgeeks.org/how-enums-works-in-typescript/
+	
+Explain the symbol type in TypeScript.
+	https://www.geeksforgeeks.org/explain-the-symbol-type-in-typescript/

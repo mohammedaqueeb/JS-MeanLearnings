@@ -1,0 +1,1038 @@
+https://www.interviewbit.com/angular-interview-questions/
+https://www.interviewbit.com/javascript-interview-questions/
+http://jasonwatmore.com/post/2018/11/16/angular-7-jwt-authentication-example-tutorial
+
+
+https://github.com/sudheerj/angular-interview-questions
+
+1. Install angular globally
+	npm install -g @angular/cli
+	npm install -g @angular/cli@9
+	ng update @angular/cli@8 @angular/core@8
+
+2. create project
+	ng new your-project-name
+
+3. serve
+	ng serve --open
+	
+4. create component
+	ng g c conponent-name
+
+5. create module
+	ng g module module-name
+
+5. create service
+	ng g service service-name
+6. create pipe
+	ng g pipe pipe-name
+7. create routing
+	ng g module routing-name --module=app 	(--module=app tells the CLI to register it in the imports array of the AppModule.)
+
+	ng g module routing-name --flat --module=app 	(--flat puts the file in src/app instead of its own folder)
+
+8. create directive
+	ng g directive directive-name
+9. Add bootstrap
+	ng add @ng-bootstrap/schematics
+10. ng g guard guardname
+
+11. create module with routing
+	ng g module admin --routing --module=app 
+
+12. create build for procuction
+	ng build --prod --base-href /folderName/
+
+
+Component
+	A. custom components are basic building blocks for a user interface,  Component is a piece of code and it is made for a specific task. Component is reusable
+
+Module
+	In Angular, a module is a mechanism to group components, directives, pipes and services that are related, in such a way that can be combined with other modules to create an application
+
+Types of Modules
+	Root Module 
+	Feature Module
+	Every application can have only one root module whereas, it can have one or more feature modules.
+	A root module imports BrowserModule, whereas a feature module imports CommonModule.
+
+Interpolation
+	C. An Angular, String interpolation is used to display dynamic data on HTML template (at user end). It facilitates you to make changes on component.ts file and fetch data from there to HTML template
+	Interpolation refers to embedding expressions into marked up text. interpolation use using {{ }}
+
+Property Binding
+	Property binding in Angular helps you set values for properties of HTML elements or directives
+	<img alt="item" [src]="itemImageUrl">
+
+Service
+	Services in Angular are simply typescript classes with the @injectible decorator. This decorator tells angular that the class is a service and can be injected into components that need that service. They can also inject other services as dependencies
+	service is globel and only one time create its object
+	An Angular service is a singleton that can be wired with components or other services via Dependency Injection.
+	There are two types of services in angular:
+		a. Built-in services – There are approximately 30 built-in services in angular.
+		b. Custom services – In angular if the user wants to create its own service he/she can do so.
+
+
+Metadata
+
+	Metadata is used to decorate a class so that it can configure the expected behavior of the class. Following are the different parts for metadata.
+
+	Annotations − These are decorators at the class level. This is an array and an example having both the @Component and @Routes decorator.
+
+	Following is a sample code, which is present in the app.component.ts file.
+
+	@Component ({ 
+	   selector: 'my-app', 
+	   templateUrl: 'app/app.component.html' 
+	}) 
+
+
+Template
+
+	A template is a form of HTML that tells Angular how to render the component. Views are typically organized hierarchically, allowing you to modify or show and hide entire UI sections or pages as a unit. 
+	The template immediately associated with a component defines that component's host view.
+
+
+Dependency Injection
+	Dependency injection, or DI, is a design pattern in which a class requests dependencies from external sources rather than creating them.
+	Dependency are services or object that a class nedds to perform its function
+
+Interface
+	Interfaces are a feature of TypeScript that allows us to define the structure or shape of an object and specify the properties and methods that an object has or should have
+
+Pipes 
+	The Angular pipes are used to Transform the Data. For Example, the Date pipe formats the date according to locale rules.
+	
+	1)DatePipe	
+	2)UpperCasePipe	
+	3)LowerCasePipe	
+	4)CurrencyPipe
+		
+		
+	1)Pure :- A pure pipe is only called when Angular detects a change in the value or the parameters passed to a pipe.
+ 	2)Impure :-An impure pipe is called for every change detection cycle no matter whether the value or parameter(s) changes
+	3) Async Pipe :- The async pipe in Angular is a built-in pipe that's used to automatically subscribe to an Observable or Promise and unwrap the data it emits within your template. 
+	 
+ 	 
+
+Directive
+	A directive is a class in Angular that is declared with a @Directive decorator.
+	Every directive has its own behaviour and can be imported into various components of an application.
+	
+	Using directive we change dom. directives are mainly used for changing the appearance or behavior of a component or a native DOM element
+	Directives are classes that add additional behavior to elements in your Angular applications 
+	
+	Types of directive
+		Component 	->  Component
+		Attribute 	->  ngClass, ngStyle, NgModel
+		Structural 	-> 	ngIf, ngFor, ngSwitch, ng-template
+		
+		
+		Component Directives: These are directives with a template. 
+		Components are the most common type of directive used in Angular.
+		They encapsulate the template, logic, and styles together.
+		
+
+Decorators
+	H. Decorators are a design pattern that is used to separate modification or decoration of a class without modifying the original source code.
+	The whole purpose of Angular decorators is to store metadata about a class, method, or property.
+	
+	@NgModule
+	@Component
+	@Injectable
+	@Directive
+	@Pipe
+	@Input
+	@Output
+	@HostBinding
+	@HostListener
+	@ContentChild
+	@ContentChildren
+	@ViewChild
+	@ViewChildren
+	
+	
+	1)Class Decorators Ex:- @component
+	2)Property Decorators:- @Input,@Output
+	3)Method Decorators  :- @Hostlistner
+	4)Parameter Decorators:-@injectable
+
+Lifecycle
+	constructor
+	ngOnChanges
+	ngOnInit
+	ngDoCheck
+	ngAfterContentInit
+	ngAfterContentChecked
+	ngAfterViewInit
+	ngAfterViewChecked
+	ngOnDestroy
+	
+	Lifecycle hooks are call back function.
+    It calls when a certain event occurs during the component’s life cycle
+
+What is AOT compilation? What are the advantages of AOT?
+	Angular provides two types of compilation:
+	By default, angular builds and serves the application using JIT compiler:
+	1. JIT(Just-in-Time) compilation
+		In JIT compilation, the application compiles inside the browser during runtime.
+	2. AOT(Ahead-of-Time) compilation
+		In AOT compilation, the application compiles during the build time.
+		
+   1)JIT downloads the compiler and compiles code exactly before Displaying in the browser.	        AOT has already complied with the code while building your application, so it doesn’t have to compile at runtime.
+   2)Loading in JIT is slower than the AOT because it needs to compile your application at runtime.	Loading in AOT is much quicker than the JIT because it already has compiled your code at build time.
+   3)JIT is more suitable for development mode.								AOT is much suitable in the case of Production mode.
+   4)Bundle size is higher compare to AOT.								Bundle size optimized in AOT, in results AOT bundle size is half the size of JIT bundles.
+   5)You can catch template binding error at display time.						You can catch the template error at building your application.
+
+Command of AOT
+	ng build --aot
+	ng serve --aot
+
+Interceptor
+	Interceptors are a unique type of Angular Service that we can implement. Interceptors allow us to intercept incoming or outgoing HTTP requests using the HttpClient . By intercepting the HTTP request, we can modify or change the value of the request.
+	1) Http Interceptors are used to transform or modifty  HttpRequest or HttpResponse at global level.
+    2) We can use HTTP interceptor to handel errors gloabally
+
+
+APP_INITIALIZER 
+
+	Usign app initializer we can executed promise or obseravble  during application initialization.
+	  Application wait until Promise is resolved or the Observable is completed. 
+	  *)The provided functions are injected at application startup and executed during app initialization.
+	  
+	  function initializeApp(){// Do some asynchronous stuff}
+	  
+	  providers: [{
+	   provide: APP_INITIALIZER,
+	   useFactory: () => initializeApp,
+	   multi: true
+	  }]
+	 })
+		  
+		  
+Types of services in angular
+
+	There are two types of services in angular:
+	Built-in services – There are approximately 30 built-in services in angular.
+	Custom services – In angular if the user wants to create its own service he can do so.
+
+ViewChildren and ViewChild
+	The ViewChild or ViewChildren decorators are used to Query and get the reference of the DOM element in the Component. ViewChild returns the first matching element and ViewChildren returns all the matching elements as a QueryList of items. We can use these references to manipulate element properties in the component.
+
+
+Transfer Data between components
+        1)Parent to child :- @Input property
+        2)child  to Parent:- 1) ViewChild 2 ) @Output() and event emitter
+        3)Unrelated comp  :- subject and behavior subject
+		
+		
+Difference between reactive and template driven forms
+
+	a. Template-driven forms make use of the "FormsModule", while reactive forms are based on "ReactiveFormsModule".
+	b. Template-driven forms are asynchronous in nature, whereas Reactive forms are mostly synchronous.
+	c. In a template-driven approach, most of the logic is driven from the template, whereas in reactive-driven approach, the logic resides mainly in the component or typescript code.
+	d. In Angular, handling forms can be done more explicitly and programmatically with reactive forms. Because they are component-centric, form controls can be created and altered dynamically.
+	e. Angular form management is made easier with template-driven forms. They create and modify forms using directives, making them template-centric.
+	
+	The choice between reactive forms and template-driven forms depends on the use case: 
+	
+	Reactive forms
+		Better for complex scenarios, granular control, and performance: 
+		Scalability: Reactive forms are more scalable because they provide direct access to the form API and use synchronous data flow. 
+		Versatility: Reactive forms are more versatile because they allow developers to add custom validations. 
+		Performance: Reactive forms are faster than template-driven forms because they are not reliant on DOM manipulation. 
+		Easier unit testing
+		
+	Template-driven forms
+		Better for simple scenarios and minimal validation: 
+		Ease of use: Template-driven forms are easy to use and user-friendly. 
+		Minimal code: Template-driven forms require less boilerplate code, making them easier for beginners to understand. 
+		Flexibility: Template-driven forms allow for flexible structures because the template model doesn't need to reflect the TypeScript model. 
+		Unit testing is another challenge
+
+
+form:-
+    1)form Control :- 1)A FormControl represents a single input field in an Angular form.
+                      2)It Tracks the value and validation status of each of these control
+    2)form Group :-FormGroup is a collection of FormControls 
+    3)form Array :-The FormArray allows us to add controls dynamically to the reactive forms.
+
+Difference between Factory and Services
+
+	In Angular, the main difference between a factory and a service is that a factory returns an object literal, while a service is a constructor function that returns an instance of an object:
+
+What is singleTon service in angular
+
+	A singleton service is a service for which only one instance exists in an application.
+	There are two ways to make a service a singleton in Angular:
+	a. Set the providedIn property of the @Injectable() to "root"
+	b. Include the service in the AppModule or in a module that is only imported by the AppModule
+
+Difference between ngIf and hide
+
+	ngIf will comment out the data if the expression is false. This way the data are not even loaded, causing HTML to load faster.
+	[hidden] will load the data and mark them with the hidden HTML attribute. This way data are loaded even if they are not visible.
+
+What is the difference between setValue and patchvalue in angular
+
+	In Angular, the main difference between setValue and patchValue is that setValue sets values for all form controls, while patchValue sets values for some form controls
+	
+	setValue
+		Sets a new value for all controls in a form group. It's useful when you have complete data that matches the form structure. setValue strictly adheres to the form group's structure and replaces the entire value for the control. If the structure doesn't match, Angular will throw an error. 
+	
+	patchValue
+		Sets values for selected or required form controls. It updates only matching values in FormArray/FormControl and ignores the rest. patchValue accepts an object with control names as keys and tries to match the values to the correct controls in the group. It's useful when you don't want to update all the controls of the reactive form, but want to fill partial controls of the form. 
+
+Difference between ng-content, ng-container and ng-template
+
+	To sum up, ng-content is used to display children in a template, ng-container is used as a non-rendered container to avoid having to add a span or a div, and ng-template allows you to group some content that is not rendered directly but can be used in other places of your template or you code
+	
+   1)<ng-content select="contentName"> :-  ng-content is used to pass html data from one html template to another html template.
+                    Basically it's used to reuse the html template.
+                    If we have to show similar html template from differant component at that time we can use ng-content.
+
+   2)<ng-container>:- A special element that can hold structural directives without adding new elements to the DOM.
+                    This not only increases performance (even so slightly) since the browser ends up rendering less elements but can also be a valuable asset in having cleaner DOMs and styles alike
+
+   3)<ng-template>:- element defines a template that is not rendered by default.
+                    we can render ng-template by using referance of Structural directives.
+					
+
+View Encapsulation
+					
+	In Angular, a component's styles can be encapsulated within the component's host element so that they don't affect the rest of the application. 
+	The Component decorator provides the encapsulation option which can be used to control how the encapsulation is applied on a per component basis.
+
+		1) Emulated :- unique attribute get attached to elements of component
+		2) ShadowDOM :- Other css not affect on component...like style.css will not affect on component
+		3) None :- It will apply over all application.It becomes the global
+                        
+Router Events:-  
+	Router events in Angular are a set of events that are triggered when the router navigates from one route to another. These events can be used to perform tasks such as logging, tracking, and updating the application's state
+	
+	1)NavigationStart 2)NavigationEnd 3)NavigationError
+
+Difference between TypeScript and JavaScript:
+
+	TypeScript is known as an Object-oriented programming language whereas JavaScript is a prototype based language.
+	TypeScript has a feature known as Static typing but JavaScript does not support this feature.
+	TypeScript supports Interfaces but JavaScript does not.
+
+Difference between promise observable angular 
+
+	(https://www.syncfusion.com/blogs/post/angular-promises-versus-observables.aspx)
+	a. the Promise is eager, whereas the Observable is lazy,
+	b. the Promise is always asynchronous, while the Observable can be either asynchronous or synchronous,
+	c. the Promise can provide a single value, whereas the Observable is a stream of values (from 0 to multiple values),
+	d. you can apply RxJS operators to the Observable to get a new tailored stream.
+		
+	#promise
+	var promise = new Promise((resolve, reject) => { 
+		resolve("Promise Resolved"); 
+	}) 
+
+	promise.then((success) => { 
+		console.log(success); 
+	}) 
+	.catch(function(error) => { 
+		console.log(error); 
+	}); 
+		
+	
+	#Observable
+	delayTime(sec:number):Observable<any>{
+		return of(([])).pipe(delay(sec));
+	}
+	
+	delayTime.subscribe(e=> console.load(e))
+	
+Difference between formgroup and formarray in angular
+
+	Both Form Group and Form Array are collection of Form Control. The difference is that Form Group aggregates from controls into a object while Form Array aggregates form controls into an array.
+
+Difference between formGroup and formArray angular
+
+	FormArray
+
+	A FormArray is a type of FormControl that represents an array of form controls. It is used to create forms that allow users to enter multiple sets of data, such as a list of items, or a set of item.
+
+	FormGroup
+
+	A FormGroup is a collection of FormControls that are organized into a single object. It is used to create forms that collect related data, such as user profile information, or billing and shipping addresses. A FormGroup can contain any number of FormControls or other FormGroups.
+
+	FormControl
+
+	A FormControl is a single form control element, such as an input, select, or textarea. It is used to create forms that collect a single piece of data, such as a user’s name, email address, or password.
+
+Router events
+
+	The Router events allow us to watch for the router state changes and run some custom logic. One of the use case scenarios is to show the loading indicator when the user navigates from one route to another. You can listen to NavigationStart and NavigationEnd events to achieve this result
+
+	The Angular Router raises events when it navigates from one route to another route. It raises several events such as NavigationStart, NavigationEnd, NavigationCancel, NavigationError, ResolveStart, etc. You can listen to these events and find out when the state of the route changes. Some of the useful events are route change start ( NavigationStart ) and
+
+	
+Route Guards in angular	 
+
+	(https://medium.com/@ryanchenkie_40935/angular-authentication-using-route-guards-bf7a4ca13ae3)
+	https://timdeschryver.dev/blog/the-difference-between-the-canactivate-and-canactivatechild-guards#canactivatechild
+	Angular’s route guards are interfaces which can tell the router whether or not it should allow navigation to a requested route. They make this decision by looking for a true or false return value from a class which implements the given guard interface
+	
+	If user does not have permission on any route.At that time we can prevent that access using Auth Guards.
+                   
+	There are five different types of guards and each of them is called in a particular sequence. The router’s behavior is modified differently depending on which guard is used. The guards are:
+		CanActivate
+		CanActivateChild
+		CanDeactivate
+		CanLoad
+		Resolve
+                  
+Annotation and Controller
+
+	annotations are a way to add metadata to a class or class member, while a controller is a JavaScript constructor function that enhances the 
+	
+	Annotations
+		Annotations are a declarative way to add metadata to code, which helps Angular understand the structure and behavior of an application's elements. For example, the @Component decorator is used to define an Angular component, and provides metadata such as its selector and template. 
+		
+	Controller
+		A controller is a JavaScript constructor function that augments the AngularJS scope. Controllers can be attached to the DOM in different ways, such as using the ngController directive or a route controller in a $route definition. 
+         
+		
+What's the difference between 'extends' and 'implements' in angular
+
+	extends is used for class inheritance, allowing a class to inherit properties and methods from another class. implements is used for interface implementation, ensuring a class adheres to a defined contract.
+	
+	Both implements and extends create subtypes. extends inherits code from the supertype (whether class or interface) implements sets up a promise to implement the methods declared in the supertype.
+	
+	
+Difference between abstract class and Interface class	
+
+	(https://www.linkedin.com/pulse/what-difference-between-interface-abstract-class-david-ramazani#:~:text=Difference%20between%20Abstract%20and%20Interface,and%20properties%20with%20full%20code.)
+	A regular class can only inherit from one Abstract class, but it can inherit from multiple interfaces
+
+Change Detection
+
+	https://medium.com/@bencabanes/angular-change-detection-strategy-an-introduction-819aaa7204e7
+	https://www.digitalocean.com/community/tutorials/angular-change-detection-strategy
+	
+	The basic mechanism of the change detection is to perform checks against two states, one is the current state, the other is the old state. If one of this state is different of the other, then something has changed, meaning we need to update (or re-render) the view.
+	Change Detection means updating the view (DOM) when the data has changed
+	
+	Angular provides you two Change Detection Strategies, 
+		ChangeDetectionStrategy.Default
+			In order to know whether the view should be updated, Angular needs to access the new value, compare it with the old one, and make the decision on whether the view should be updated.
+			By default, Angular makes no assumption on what the component depends upon. So it has to be conservative and will checks every time something may have changed, this is called dirty checking. In a more concrete way, it will perform checks for each browser events, timers, XHRs and promises
+			
+		ChangeDetectionStrategy.onPush
+			When using the onPush strategy on the component, you basically say to Angular that it should not make any guess on when it needs to perform the check for change. It will rely only on the change of the Input references, some events triggered by itself (the component) or one of its children. Lastly, you, the developer, can ask explicitly Angular to do it with the componentRef.markForCheck() method.
+		
+		import {
+		  Component,
+		  Input,
+		  ChangeDetectionStrategy,
+		  ChangeDetectorRef
+		} from '@angular/core';
+
+		@Component({
+		  selector: 'app-child',
+		  templateUrl: './child.component.html',
+		  changeDetection: ChangeDetectionStrategy.OnPush
+		})
+		export class ChildComponent {
+		  @Input() data: string[];
+
+		  constructor(private cd: ChangeDetectorRef) {}
+
+		  refresh() {
+			this.cd.detectChanges();
+		  }
+		}
+
+debounceTime() &throttleTime() & distinctUntilChanged()
+
+    debounceTime:-
+	The debounceTime() operator delays the emission of items for specified amount of time.
+	If a new item is emitted before the specified time has passed, the previous emission is discarded, and the timer is reset with the new emission.
+	Useful for scenarios such as user input validation, where you want to wait for the user to stop typing before performing an action.
+	
+    distinctUntilChanged()
+	The distinctUntilChanged() operator filters out consecutive duplicate items emitted by the source observable.
+	If an emitted item is the same as the previously emitted item, it is ignored.
+	Optionally, you can provide a comparison function to determine whether two items are considered equal.
+	Useful when you want to handle only distinct values, such as filtering out repetitive user interactions.
+
+Authentication and authorization 
+
+	Authentication verifies the identity of users, while authorization determines what actions they can perform within the application
+	
+Design Pattern
+
+	1)Creational Design Pattern Ex:- Singleton,Factory
+	2)Structural Design Pattern Ex:- Adaptor,Bridge
+	3)Behavioral Design Pattern Ex:- Command,Interpreter,Chain of Resposiblity
+
+
+
+Encapsulation 
+	https://www.youtube.com/watch?v=luXfQYJgrp0
+	https://www.youtube.com/watch?v=ZP_yhOr-41g
+	The process of wrapping properties and functions in a single unit is known as encapsulation
+	@Component({
+		encapsulation: ViewEncapsulation.none 				// By default its value is ViewEncapsulation.Emulated 
+	})
+	
+	Types of view encapsulation
+		Emulated
+		None
+		ShadowDom
+	
+Content Projection
+	Content Projection allows you to insert a shadow Dom in your component. 
+	If you want to insert HTML elements or other components in a component, then you do that using the concept of Content Projection. In angular you achieve Content Projection using <ng-content></ng-comtent>
+	Using the @Input decorator you can pass only simple string to the component. But what if you need to pass different types of data to the component such as:
+		Inner HTML
+		HTML Elements
+		Styled HTML
+		Another Component
+	
+	<ng-content select="tagName"> show all element that match tagname </ng-comtent>
+	<ng-content select=".className"> show all element that match classname </ng-comtent>
+	<ng-content select="#idName"> show all element that match id </ng-comtent>
+	
+	
+difference between promise and observable in javascript
+	
+	Promise: A Promise is a JavaScript object that links producing code and consuming code.
+		
+	Observables												| 		Promises
+		
+	: Emit multiple values over a period of time. 					Emit a single value at a time.
+	: Are lazy: they’re not executed until we subscribe to    		Are not lazy: execute immediately after creation.
+	  them using the subscribe() method.
+	: Have subscriptions that are cancellable using the  			Are not cancellable.
+	  unsubscribe() method, which stops the listener from 
+	  receiving further values.
+	: Provide the map for forEach, filter, reduce, retry, and  		Don’t provide any operations.
+	  retryWhen operators
+	: Deliver errors to the subscribers.	 						Push errors to the child promises.
+
+How to create a custom observable
+
+	 const myObservables = Observable.create((observer: Observer<string>) => {
+		observer.next('FIRST RESPONSE****:');
+		observer.next('SECOND RESPONSE****:');
+		observer.error('ERROR RESPONSE****:') // if you want to show error
+		observer.complete();
+    });
+
+	const customSubscrition = myObservables.subscribe((response: string) => {
+      console.log("RESPONSE: ", response);
+    },
+      (error: string) => {
+        console.log("FAILURE RESPONSE: ", error);
+      },
+      () => {
+        // This will not be called since there is an error at 5 seconds before the completion.
+        console.log("COMPLETION:");
+      }
+    );
+	
+			
+What is Router Outlet
+	Router Outlet is a dynamic component that the router uses to display view based on router navigations 
+		
+package.json
+	A package.json file contains metadata about the project and also the functional dependencies that is required by the application
+
+package.lock.json
+	Package.lock.json is created for locking the dependency with the installed version. It will install the exact latest version of that package in your application and save it in package.json
+	
+This keyword
+	This is an object in js this represent current execution context
+	
+Recursion function
+	Recursion is a process of calling itself. A function that calls itself is called a recursive function.
+	
+	// Program to countdown till 1
+	// recursive function
+	
+	function counter(count) {
+		// display count
+		console.log(count);
+		// condition for stopping
+		if(count > 1) {
+
+			// decrease count
+			count = count - 1;
+
+			// call counter with new value of count
+			counter(count);
+		} else {
+
+			// terminate execution
+			return;
+		};
+	};
+
+	// access function
+	counter(5);
+
+How we can exclude some url in Interceptor
+
+	we can add a simple flag to the header when using HttpClient, then in the HTTP_INTERCEPTORS, we can check if this flag is existing, to decide to handle it or not!
+	
+what is rxjs operator
+	RxJS is mostly useful for its operators, even though the Observable is the foundation. Operators are the essential pieces that allow complex asynchronous code to be easily composed in a declarative manner.
+	
+
+What is Polyfills in Angular
+	
+	Angular polyfills are JavaScript scripts or modules that are included in an Angular application to ensure compatibility with older browsers. These polyfills enable Angular applications to run smoothly and consistently across different environments, ensuring a consistent user experience.
+	
+	The code we write is mostly in ES6(New Features: Overview and Comparison) and is not compatible with IE or firefox and needs some environment setups before being able to be viewed or used in these browsers.
+	
+	Polyfills.ts was provided by angular to help you do away with need to specifically setup everything
+	
+What server is required for Angular application
+	Angular applications can be served with a simple static HTML server. This is because Angular is a front-end framework that performs development and functionality on the browser, not the server
+	
+Use of update command in angular
+
+	Update Angular Packages: Now you can update the Angular packages in your project. Run the command ng update @angular/core@latest . This command will update all the Angular packages in your project to their latest versions.
+	
+	
+TrackByFunction
+
+	NgForOf needs to uniquely identify items in the iterable to correctly perform DOM updates when items in the iterable are reordered, new items are added, or existing items are removed.
+
+	On each ngDoCheck triggered for the ngForOf directive, Angular checks what objects have changed. It uses differs for this process and each differ uses the trackBy function to compare the current object with the new one. 
+	The default trackBy function tracks items by identity: const identify = (index: number, item: any) => item;
+	
+	It receives the current item and should return some value. Then the value returned by the function is compared against the value this function returned the last time. If the value changes, the differ reports a change.
+
+budget in angular
+
+	The budget is the term employed by Angular to represent the ultimate size of your application that you will still consider "normal".
+
+	For example, you may accept that the bundle of your application will be at most 2MB but more will be strange and over 5MB should not be acceptable.
+
+	you can configure this behavior straight into the your project by setting the budget of your application in your angular.json:
+
+refresh token
+
+	A refresh token is a special key that enables a client for an API or service to retrieve new access tokens without requiring the user to perform a complete login. 
+	In other words, an application can exchange a valid refresh token for a new access token.
+	
+	Access Token:
+
+	Grants access to protected resources on the server.
+	Has a limited lifespan, typically ranging from a few minutes to a few hours.
+	Requires re-authentication once expired.
+	
+	Refresh Token:
+
+	Facilitates obtaining a new access token without user interaction.
+	Generally has a longer lifespan than access tokens.
+	Stored securely on the client-side.
+	
+
+Difference between Observable and Promise
+
+	Promise
+
+		A Promise handles a single event when an async operation completes or fails.
+	
+	Observable
+
+		An Observable is like a Stream (in many languages) and allows you to pass zero or more events where the callback is called for each event.
+
+		Often Observable is preferred over Promise because it provides the features of Promise and more. With Observable it doesn't matter if you want to handle 0, 1, or multiple events. You can utilize the same API in each case.
+
+		Observable also has the advantage over Promise to be cancellable. If the result of an HTTP request to a server or some other expensive async operation isn't needed anymore, the Subscription of an Observable allows you to cancel the subscription, while a Promise will eventually call the success or failed callback even when you don't need the notification or the result it provides anymore.
+
+		While a Promise starts immediately, an Observable only starts if you subscribe to it. This is why Observables are called lazy.
+
+		Observable provides operators like map, forEach, reduce, ... similar to an array
+
+		Lazy execution allows you to build up a chain of operators before the observable is executed by subscribing, to do a more declarative kind of programming.
+	
+	
+
+Microfrontend
+
+	In Angular, the term "micro front-end" refers to the architectural strategy of dividing a large, massive Angular application into more manageable, independent front-end modules. Each module can be built, deployed, and maintained independently, and each represents a particular feature or functionality of the program.
+	
+	What is Module Federation?
+	
+	Module Federation allows developers to combine separate apps into one Angular application where each separate app is loaded through lazy loading.
+
+	So, this approach not only improves development productivity but also boosts the overall performance of the app. 
+	
+	To install Module Federation on all applications using the command : 
+
+	npm i @angular-architects/module-federation@16.0.4
+
+
+Standalone Component
+
+	In Angular, a standalone component refers to a self-contained and reusable unit of code that encapsulates logic, data, and UI elements. Unlike regular components, standalone components are not dependent on Angular's NgModule system for their configuration and dependencies. By using standalone components, developers have more flexibility and control over their codebase. 
+	
+	They can create small, focused components that are easier to understand, test, and maintain. Standalone components also promote better organisation of code, as they can be grouped based on their functionality or purpose.
+
+	Additionally, standalone components lead to enhanced efficiency and reduced bundle size. Since they are self-contained units, only the necessary dependencies are included in the final build, resulting in a more optimised application.
+
+How do you perform Error handling?
+
+	Global Error Handling:
+	
+		Set up a global error handler to catch unhandled errors in your application. This can be done by creating a service that implements the ErrorHandler interface.
+
+		In your AppModule, provide the ErrorHandler with your custom handler.
+		
+	HTTP Interceptor for Error Handling:
+
+		Use an HTTP interceptor to handle HTTP errors globally. Intercepting HTTP requests and responses allows you to centralize error handling logic.		
+
+		Don’t forget to provide the interceptor in your AppModule:
+
+	Component-level Error Handling:
+
+		Implement error handling at the component level, especially for critical operations or asynchronous tasks.
+
+
+	Logging Services:
+
+		Utilize logging services to log errors and other relevant information. Services like Angular’s Console service or third-party logging libraries can be helpful.
+
+
+		Use this service in your components or services to log errors.
+
+			
+What are the differences between Angular decorator and annotation?
+
+	Although Annotations and Decorators both share the same @ symbol in Angular, they both are different language features.
+	
+	Annotations: These are hard-coded language feature. Annotations are only metadata set on the class that is used to reflect the metadata library.
+		
+	decorator is a function that adds metadata to a class, its members, or its method arguments. A decorator is just a function that gives you access to the target that needs to be decorated.
+	
+	
+	Types of Decorators:
+
+		Class decorators like @Component, @NgModule
+		Property decorators like @Input and @Output
+		Method decorators like @HostListener
+		Parameter decorators like @Injectable
+
+
+What is server-side rendering in Angular?
+
+	Server-Side Rendering involves rendering web pages on the server and sending fully rendered HTML to the client’s browser. 
+	This contrasts with traditional client-side rendering, where the browser fetches raw HTML and JavaScript, then constructs the DOM (Document Object Model) and renders the page. SSR offers several benefits, including improved SEO, faster initial page loads, and better support for users with slow internet connections or disabled JavaScript.
+	
+	Installing Dependencies Angular Universal schematics:- ng add @nguniversal/express-engine
+	Creating a Universal:- Component ng generate universal --clientProject my-ssr-app
+	Building and Serving the Application :- npm run build:ssr / npm run serve:ssr
+	
+	
+What is NgZone?
+
+	NgZone is an injectable service in Angular that allows you to run code inside or outside of the Angular zone. It's often used to optimize performance when starting asynchronous tasks. 
+	
+	Here are some things you can do with NgZone:
+	
+	run :- Executes a function synchronously within the Angular zone. This ensures that any changes made by the function are detected and updated in the view.
+	
+	runGuarded :- 	Similar to run, but synchronous errors are caught and forwarded instead of rethrown.
+
+	runOutsideAngular :- Executes code outside of the Angular zone. This is useful for code that doesn't need Angular's change detection or when optimizing performance for tasks that don't affect the UI. 
+	
+	NgZone wraps asynchronous browser APIs and notifies consumers when an asynchronous task has started or ended. This includes XHR calls, setTimeout(), and user events like click, submit, and mousedown
+	
+Why we need zone js in Angular?
+	Zone. js is a crucial library in Angular that simplifies the handling of asynchronous operations. It creates a context or "zone" to keep track of these operations, ensuring Angular's change detection system works efficiently.
+
+custom component & dynamic Component
+
+	custom components are basic building blocks for a user interface, 
+	
+	while dynamic components are components that are instantiated and placed in the application at runtime, Dynamic components are useful when you want to inject components into your application based on user interaction or data, rather than defining them statically in templates
+	
+	
+	How to create a dynamic component
+	To create a dynamic component, you can use the ng g component dynamic command to create a basic component in your dynamic directory. 
+	You can then inject the ComponentFactoryResolver into your app component, and use the resolver to create the component when you're ready to add it. 
+	
+	this.componentFactoryResolver.resolveComponentFactory(DialogComponent);
+	
+	Once we have the factory, we can use it to create an instance of our DialogComponent.
+
+	const componentRef = componentFactory.create(this.injector);
+	
+	we need to attach the new component to the angular component tree (which is separate from the DOM). We do so by using the ApplicationRef we requested.
+	
+	
+	 this.appRef.attachView(componentRef.hostView);
+	 
+	 we get the root DOM-element of our DialogComponent and attach it to the HTML-body. Also, we assign the componentRef to our property.
+	 
+	 
+	  const domElem = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+	  document.body.appendChild(domElem);
+
+	  this.dialogComponentRef = componentRef;}
+
+	
+	
+security practices on angular application in angular
+
+	Key Security Features in Angular
+	
+	Cross-Site Scripting (XSS) Protection :- 
+	
+		XSS attacks involve injecting malicious scripts into web pages viewed by other users. Angular mitigates XSS vulnerabilities by sanitizing user input and output, ensuring that any potentially dangerous content is escaped or removed.
+		
+		
+		import { DomSanitizer } from '@angular/platform-browser';
+
+		constructor(private sanitizer: DomSanitizer) {}
+
+		sanitizeInput(input: string): string {
+		  return this.sanitizer.sanitize(SecurityContext.HTML, input);
+		}
+		
+	
+	Content Security Policy (CSP)
+	
+		Content Security Policy helps prevent XSS attacks by defining a whitelist of trusted sources for content loading. Angular supports CSP configuration, allowing developers to specify policies in the application’s metadata.
+
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'
+	
+	a).Keep Dependencies Updated: Regularly update Angular and its dependencies to patch security vulnerabilities and benefit from the latest security enhancements.
+	
+	b).Input Validation: Always validate and sanitize user input to prevent injection attacks and ensure data integrity.
+	
+	c).Use HTTPS: Secure communication between the client and server using HTTPS to prevent data interception and tampering.
+	
+	d).Authentication and Authorization: Implement robust authentication mechanisms such as JWT (JSON Web Tokens) and proper authorization to restrict access to sensitive resources.
+	
+	e).Avoid Eval and InnerHTML: Avoid using eval() and innerHTML as they can introduce security vulnerabilities. Instead, utilize Angular's built-in sanitization mechanisms.
+
+virtual dom and incremental dom in angular
+
+	virtual DOM (VDOM) and incremental DOM (IDOM) are both used to manage the Document Object Model (DOM), but they differ in how they update the DOM and their performance: 
+	
+	Virtual DOM
+		Creates a new virtual DOM tree for each component that's rerendered. It's more efficient overall because it minimizes unnecessary DOM operations. VDOM is also faster for complex updates, but it's more complex to implement and understand. 
+		
+	Incremental DOM
+		Updates the DOM directly in-place. It's more efficient for simple updates and has a smaller memory footprint. However, updates can be slower with large DOM changes because IDOM follows a hierarchical approach.
+
+
+
+how can i post data from one component to another component
+
+How to create cache in angular
+
+
+Angular 14 New feature
+
+	1. Standalone Component: means component not depends on any other things (Reduce the need of ngModule)
+	2. Typed Form: Reactive form in fully typed
+	3. Title acceciability: we can change page title based on route
+	4. Extended developer diagnostics: we can get error and worning on the time of development
+	5. CLI enhancements: 
+	
+Angular 17 New feature
+
+	1. Launch new website for learn angular
+	2. Include new directive using @ (@for, @if, @empty, @switch). improve performance and readybility
+	3. Delay: @defer usin defer we can delay component loading and its dependency
+	4. ssr(Server Side Rendring): it is use for SEO and also improve performace of application (ng new projectName --ssr)
+	5. standallon by default true,  
+	6. Signals: using signals we can manage our state
+	7. Build is faster: in 17 build in create by the use of es build on the place webpack
+	
+
+New Feature in angular 14
+	https://www.youtube.com/watch?v=IqaurE0LXPI
+	Standalone Component: he biggest advantage of standalone components is that they’re easier to customize
+	Angular CLI Auto-Completion: 
+	Strictly Typed Forms: 
+	Improved Template Diagnostics: 
+	
+	
+---------------------------------------------------------- RXJS  ----------------------------------------------------------
+	
+What is ngrx
+	rxjs + redux = ngrx
+	rxjs are observable
+	redux is a globel state mangment library	
+	
+	Ngrx is a framework for managing state in Angular.
+	state means the data and state managment means transfering data between component.
+	-Managing global and local state
+	-Entity Collection management
+	-integration with Angular Router
+	
+what is rxjs operator
+	https://blog.knoldus.com/rxjs-operators-in-angular/
+
+
+Merge map :- 
+   mergeMap is an operator in RxJS used for flattening observables. It's particularly useful when you have an observable that emits other observables, 
+   and you want to merge the emissions of these inner observables into a single observable stream.
+	Here's how mergeMap works:
+	It takes each value emitted by the source observable.
+	It applies a function to each of these values, which returns an inner observable.
+	It subscribes to each inner observable and emits the values it produces.
+	It merges the emissions from all the inner observables into a single observable stream.
+	It does not wait for inner observables to complete before subscribing to the next one. 
+        If the source observable emits a new value while the previous inner observable is still processing,
+        mergeMap subscribes to the new inner observable, and both are processed concurrently.
+
+
+
+concat:-
+	1)It takes one or more observables as arguments.
+	2)It subscribes to each observable sequentially, waiting for each one to complete before subscribing to the next.
+	3)It emits all the values emitted by the first observable, then emits all the values emitted by the second observable, and so on.
+	4)It completes only when all the concatenated observables complete.
+
+mergeMap vs switchMap vs concatMap
+
+   MergeMap :- when you want to handle multiple inner observables concurrently, without waiting for previous inner observables to complete.
+   switchMap:- when you only care about the most recent inner observable and want to cancel previous ones.
+   concatMap:- when you want to maintain the order of emissions and process inner observables sequentially, one at a time.
+
+mergeMap:
+	When a new outer value is emitted, mergeMap subscribes to the inner observable associated with that value immediately, without waiting for the previous inner observable to complete.
+	It merges the emissions of all inner observables into a single observable stream.
+	It doesn't cancel or complete inner observables when a new outer value arrives.
+	Useful when you want to process multiple inner observables concurrently.
+    Example use cases: parallel HTTP requests, handling multiple user inputs simultaneously.
+
+switchMap:
+
+	When a new outer value is emitted, switchMap unsubscribes from the previous inner observable (if still active) and subscribes to the new inner observable associated with the latest value.
+	It switches to a new inner observable each time a new outer value arrives.
+	Useful when you want to ignore previous inner observables and only care about the most recent one.
+    Example use cases: type-ahead search, autocomplete functionality.
+	
+	
+concatMap:
+
+	When a new outer value is emitted, concatMap queues the inner observable associated with that value and waits for the previous inner observable to complete before subscribing to the next one.
+	It maintains the order of emissions by ensuring that inner observables are processed sequentially.
+	Useful when the order of emissions is important and you want to process one inner observable at a time.
+    Example use cases: sequential API requests where the order matters, processing tasks in a queue-like fashion.
+
+
+mergeMap - creates an Observable immediately for any source item, all previous Observables are kept alive. (this was formerly known as flatMap).
+
+concatMap - waits for the previous Observable to complete before creating the next one
+
+switchMap - for any source item, completes the previous Observable and immediately creates the next one
+
+exhaustMap - map to inner observable, ignore other values until that observable completes
+
+forkJoin 
+	forkJoin takes a number of input observables and waits for all passed observables to complete. Once they are complete, it will then emit a group of the last values from corresponding observables.
+
+	The resulting stream emits only one time when all of the inner streams complete. It will never complete if any of the inner streams doesn’t complete and will throw an error if any of the inner streams errors out.
+		   
+combineLatest
+	Combines multiple Observables to create an Observable whose values are calculated from the latest values of each of its input Observables.
+	
+	combineLatest combines the values from all the Observables passed in the observables array. This is done by subscribing to each Observable in order and, whenever any Observable emits, collecting an array of the most recent values from each Observable. So if you pass n Observables to this operator, the returned Observable will always emit an array of n values, in an order corresponding to the order of the passed Observables (the value from the first Observable will be at index 0 of the array and so on).
+		
+		
+What is Subject
+	Subject is a special type of Observable in RxJs Library in which we can send our data to other components or services. A Subject is like an Observable but can multicast to many observers which means subject is at the same time an Observable and an Observer.
+ 
+	Here are some important points of subjects
+		a. A Subject is a Special type of Observable that allows value to be multicasted to many Observers.
+		b. Subject are like event emitters.
+		c. No Initial Value
+
+What is BehaviorSubject
+	Behavior Subject is similar to subject but only difference is that we can set the initial value .
+
+
+what is retry(), or replay() operators
+
+	retry() allows you to retry a failed request, while the replay subject allows you to replay previously emitted values to new subscribers:
+	
+	retry
+	This operator resubscribes to the original source observable when an error occurs, allowing you to retry a failed request. It's useful for retrying HTTP requests when the backend occasionally returns intermittent errors. You can specify the number of retries with the count parameter. 
+
+	replay subject
+	This type of subject allows you to replay a specified number of previously emitted values to new subscribers. It's useful when you want 
+	subscribers to receive a certain number of historical values when they subscribe to the observable.
+
+
+map and tap in angular
+	A mapping function takes a thing and returns another thing. e.g. I can build a function that takes 10 and returns 11, that takes 11 and returns 12, etc.
+	
+	The map operator will simply apply a function to that data and return the result.
+	
+	The tap operator however takes a data, apply a function to that data but returns the original data, if the function bothered to return a result, tap just ignores it.
+
+SwitchMap & concatMap
+	switchMap only considers the most recent request, ignoring all previous ones. 
+	concatMap processes request one by one, waiting for each to complete before starting the next
+
+
+
+concat vs exaust vs merge
+
+	
+
+--------------------------------------------  Unit testing in angular   ----------------------------------------------
+
+what is jasmine
+
+	Jasmine is an open-source JavaScript framework for unit testing that uses behavior-driven development (BDD) to test JavaScript applications. It's popular among developers because it's easy to set up and write tests, and it has a strong community and documentation.
+
+test suite:-
+	A test suite is a collection of test cases that are intended to be executed together
+
+describe:- 
+		is a function provided by testing frameworks like Jasmine to define a test suite.
+        A test suite is a collection of related tests that allows you to group and organize your test cases.
+
+beforeEach: 
+	Functions that run before each test case to set up the test environment.
+
+it: 
+	Defines individual test cases. Each it block represents a single test.
+
+Code Coverage:-
+	 To generate code coverage reports with Karma, you need to use a plugin called ‘karma-coverage’.
+	 First, install it using npm by running the command ‘npm install karma-coverage –save-dev’.
+	 Then, configure your ‘karma.conf.js’ file. Add ‘coverage’ to the reporters array and
+	 specify the type of report you want in the coverageReporter object.
+
+
+Async test cases :- 
+		Jasmine provides three methods for asynchronous testing: Callbacks, Promises, and Async/Await.
+
+		Jasmine is an open-source testing framework
+		Jasmine provides facility to write unit test casesso each line to javascript statement is properly unit tested.
+		
+		
+what is toBeTruthy angular
+	
+	toBeTruthy This Boolean matcher is used in Jasmine to check whether the result is equal to true or false
+
+
+What is TestBed?
+	Configures and initializes environment for unit testing and provides methods for creating components and services in unit tests.
+	
+How to mock service to inject in a unit test?
+
+
+
+	
+	
+	
