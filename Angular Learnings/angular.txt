@@ -112,6 +112,14 @@ Pipes
 	1)Pure :- A pure pipe is only called when Angular detects a change in the value or the parameters passed to a pipe.
  	2)Impure :-An impure pipe is called for every change detection cycle no matter whether the value or parameter(s) changes
 	3) Async Pipe :- The async pipe in Angular is a built-in pipe that's used to automatically subscribe to an Observable or Promise and unwrap the data it emits within your template. 
+	
+	Custom Pipe
+	
+	export class StarPipe implements PipeTransform {
+	  transform(value: string): string {
+	    return value[0].toUpperCase() + value.substr(1).toLowerCase();
+	  }
+	}
 	 
  	 
 
@@ -131,6 +139,15 @@ Directive
 		Component Directives: These are directives with a template. 
 		Components are the most common type of directive used in Angular.
 		They encapsulate the template, logic, and styles together.
+		
+	@Directive({
+	  selector: '[appHighlight]',
+	})
+	export class HighlightDirective {
+	  constructor(private el: ElementRef) {
+		this.el.nativeElement.style.backgroundColor = 'yellow';
+	  }
+	}
 		
 
 Decorators
@@ -193,6 +210,29 @@ Interceptor
 	Interceptors are a unique type of Angular Service that we can implement. Interceptors allow us to intercept incoming or outgoing HTTP requests using the HttpClient . By intercepting the HTTP request, we can modify or change the value of the request.
 	1) Http Interceptors are used to transform or modifty  HttpRequest or HttpResponse at global level.
     2) We can use HTTP interceptor to handel errors gloabally
+	
+	Http interceptor include in ngmodel
+	
+	@NgModule({
+	  providers: [
+		{
+		  provide: HTTP_INTERCEPTORS,
+		  useClass: InterceptorOne,
+		  multi: true,
+		}
+	  ]	  
+	});
+	
+	Create HttpInterceptor
+	
+	@Injectable()
+	export class InterceptorOne implements HttpInterceptor {
+
+	  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+		console.log('InterceptorOne is working');
+		return next.handle(req);
+	  }
+	}
 
 
 APP_INITIALIZER 
@@ -346,6 +386,12 @@ Difference between promise observable angular
 	}
 	
 	delayTime.subscribe(e=> console.load(e))
+	
+	
+	Observable.create(observer => {	
+	 observer.next("data to send can be object or anything");
+	 observer.complete();
+    })
 	
 Difference between formgroup and formarray in angular
 
@@ -609,6 +655,17 @@ TrackByFunction
 	The default trackBy function tracks items by identity: const identify = (index: number, item: any) => item;
 	
 	It receives the current item and should return some value. Then the value returned by the function is compared against the value this function returned the last time. If the value changes, the differ reports a change.
+	
+	example
+	
+	<li *ngFor="let item of list; trackBy:identify">{{item.name}}</li>
+	
+	
+	method of trackby
+	identify(index, item){
+		 return item.name; 
+	  }
+	
 
 budget in angular
 
@@ -829,12 +886,96 @@ virtual dom and incremental dom in angular
 		Updates the DOM directly in-place. It's more efficient for simple updates and has a smaller memory footprint. However, updates can be slower with large DOM changes because IDOM follows a hierarchical approach.
 
 
+how to improve angular application performace and secrutity
 
-how can i post data from one component to another component
+	Lazy loading: A built-in feature that asynchronously loads components when a route is hit. 
+	
+	OnPush change detection: This strategy only checks components when their input properties change, which can optimize change detection for large applications. 
+	
+	Server-side rendering: Angular Universal allows Angular applications to be rendered on the server side, which can be beneficial for SEO. 
+	
+	Track by in ngFor: Use the trackBy directive to provide a track-by function when using ngFor to render lists. This helps Angular track changes efficiently. 
+	
+	Caching strategies: Implementing caching strategies can optimize performance, reduce redundant computations, and enhance the user experience.
+	
+	Optimize images: Use a Lighthouse check to identify suboptimal images by type or size. 
+	
+	Preloading modules: Preloading can solve the problem of the router having to fetch other modules from the server, which can take more time.
+	
+	Secrutity
+	
+	HTTPS Everywhere: Apply HTTPS Everywhere to improve security. 
+	
+	Angular Interceptors: Use Angular Interceptors for HTTP Security to improve security. 
+	
+	CSRF Protection: Implement CSRF Protection to improve security. 
+	
+	Strict Input Validation: Use strict input validation to improve security. 
+	
+	Regularly Scan and Update Dependencies: Regularly scan and update dependencies to improve security. 
+	
+	Secure Session Management: Use secure session management to improve security. 
+	
+	Automated Security Testing: Use automated security testing to improve security. 
+
 
 How to create cache in angular
 
 
+Signals
+	
+	
+	Signals in Angular are a reactivity model that allows developers to manage state and reactivity in a more efficient and predictable way. Signals are a new feature in Angular that was introduced in Angular 18
+	
+	Signals are a wrapper around a value that notifies consumers when the value changes. Signals can contain any value, including primitives and complex data structures. 
+	
+	
+	Signals in Angular have brought a lot of DX benefits. We can easily create and derive state and also run side effects when the state changes using effects. We don’t have to subscribe to them, we don’t have to unsubscribe from them, and we don’t have to worry about memory leaks.
+
+	We can just call them and they will return their current value.
+	
+	
+	const name = signal('John'); // create a signal with initial value
+	const upperCaseName = computed(() => name().toUpperCase()); // create a computed signal
+
+	effect(() => {
+	  console.log(name() + ' ' + upperCaseName()); // run side effect when name or upperCaseName changes
+	});
+
+	setTimeout(() => {
+	  name('Jane'); // change the name after 1 second
+	}, 1000);
+
+	// Output:
+	// John JOHN
+	// Jane JANE
+
+
+Signals and Change Detection
+
+	Change Detection
+	optimised localised change detection, by local means when something changes within components so earlier irrespective of wherever something happens angular had to run change detection from top to bottom because zone js is aware only of if events triggered but not have fine grained reactivity.
+
+	Signals
+	On the other side signals provide fine grained reactivity using which angular now don't require traversing the whole components tree but making pin pointed changes locally right into the desired component
+
+	Another advantage signal brings with it going zoneless and reducing build size
+
+	Also zone js does not path all newly introduced features in js like async await so Angi cli had to down level certain things to make it work with zone js(my understanding)
+	
+	when using signals templates are reactive to changes in signals and it's dependency so whenever signals (used in template) dependency or producer signal update then template which acts as a consumer is updated
+	
+when ngcontentinit and ngcontentchecked called
+
+	ngAfterContentInit is a method that is called only one time while the lifecycle of the component is going on, after the first ngDoCheck. After creating the component, Angular projects the external content, and this hook enables developers to access the ElementRef of the ContentChild for the first time.
+	
+	this works on <ng-content> & @ContentChild()
+	
+	
+when there is no input binding then what lifecycle hooks call in angular
+	
+	ngOnChanges() Called before ngOnInit() (if the component has bound inputs) and whenever one or more data-bound input properties change.
+	
 Angular 14 New feature
 
 	1. Standalone Component: means component not depends on any other things (Reduce the need of ngModule)
@@ -862,24 +1003,110 @@ New Feature in angular 14
 	Improved Template Diagnostics: 
 	
 	
----------------------------------------------------------- RXJS  ----------------------------------------------------------
+	
+---------------------------------------------------------- NJRX  ----------------------------------------------------------
 	
 What is ngrx
 	rxjs + redux = ngrx
 	rxjs are observable
-	redux is a globel state mangment library	
+	redux is a globel state management library	
 	
-	Ngrx is a framework for managing state in Angular.
+	NgRx is an open-source library that provides reactive state management for Angular applications. It's a framework that uses RxJs to implement Redux-based state management.
+	
+	State management is the process of managing the states of user controls. It helps developers build large-scale applications with heavy data communications while sustaining high application performance.
+
 	state means the data and state managment means transfering data between component.
+	
 	-Managing global and local state
 	-Entity Collection management
 	-integration with Angular Router
 	
-what is rxjs operator
-	https://blog.knoldus.com/rxjs-operators-in-angular/
+	
+	Key points to understand:
 
+	State: Think of it as a snapshot of your app’s data at any moment.
+	
+	Actions: They are like messages that describe what happened in the app, such as a button click or data being loaded.
+	
+	Reducers: These are functions that decide how the data should change when an action occurs. They take the previous state and the action and calculate the new state.
+	
+	Store: It’s like a big container that holds the entire app’s data.
+	
+	Selectors: These are like special tools to fetch specific pieces of data from the store when you need them.
+	
+	Creating an NgRx Reducer
+	
+	export const ADD_PRODUCT = 'ADD_PRODUCT';
+	export function addProductReducer(state: Product[] = [], action :any) {
+	  switch (action.type) {
+		case ADD_PRODUCT:
+			return [...state, action.payload];
+		default:
+			return state;
+		}
+	}
+	
+	
+	
+	Configuring the NgRx Store
+	
+	@NgModule({
+	  imports: [
+		StoreModule.forRoot({product: addProductReducer})
+	  ]
+	});
+	
+	
+	Dispatching the NgRx Action
+	
+	export class ProductComponent implements OnInit {
+	  
+	  constructor(private store: Store<AppState>) {
+	  
+		this.products = this.store.select(state => state.product);
+		
+	  }
+	  
+	  addProduct(name:any, price:any) {
+		this.store.dispatch({
+		  type: 'ADD_PRODUCT',
+		  payload: <Product> {
+			name: name,
+			price: price
+		  }
+		});
+	  }
+	}
+
+
+
+---------------------------------------------------------- RXJS  ----------------------------------------------------------
+	
+what is rxjs
+	RxJS (Reactive Extensions for JavaScript) is a library that allows developers to create asynchronous and event-based programs using observable sequences. It's a reactive programming library that uses the Observable pattern
+
+what is rxjs operators
+
+	RxJS operators are functions that manipulate streams of data in Angular applications. They are used to perform operations on observables, such as filtering, mapping, and reducing.
+	
+		
+	Types of RxJS operators 
+	
+	Creation: Operators that create observables, such as of, from, and fromEvent
+	
+	Filtering: Operators that filter observables, such as filter, take, and debounceTime
+	
+	Transformation: Operators that transform observables, such as map, switchMap, and scan
+	
+	Combination: Operators that combine observables, such as concatAll, withLatestFrom, and zip
+	
+	Error handling: Operators that handle errors, such as catchError, retry, and retryWhen
+	
+	Multicasting: Operators that multicast observables, such as multicast, publish, and share
+	
 
 Merge map :- 
+
    mergeMap is an operator in RxJS used for flattening observables. It's particularly useful when you have an observable that emits other observables, 
    and you want to merge the emissions of these inner observables into a single observable stream.
 	Here's how mergeMap works:
@@ -890,14 +1117,11 @@ Merge map :-
 	It does not wait for inner observables to complete before subscribing to the next one. 
         If the source observable emits a new value while the previous inner observable is still processing,
         mergeMap subscribes to the new inner observable, and both are processed concurrently.
+		
+	It doesn't cancel or complete inner observables when a new outer value arrives.
+	Useful when you want to process multiple inner observables concurrently.
+    Example use cases: parallel HTTP requests, handling multiple user inputs simultaneously.
 
-
-
-concat:-
-	1)It takes one or more observables as arguments.
-	2)It subscribes to each observable sequentially, waiting for each one to complete before subscribing to the next.
-	3)It emits all the values emitted by the first observable, then emits all the values emitted by the second observable, and so on.
-	4)It completes only when all the concatenated observables complete.
 
 mergeMap vs switchMap vs concatMap
 
@@ -905,12 +1129,6 @@ mergeMap vs switchMap vs concatMap
    switchMap:- when you only care about the most recent inner observable and want to cancel previous ones.
    concatMap:- when you want to maintain the order of emissions and process inner observables sequentially, one at a time.
 
-mergeMap:
-	When a new outer value is emitted, mergeMap subscribes to the inner observable associated with that value immediately, without waiting for the previous inner observable to complete.
-	It merges the emissions of all inner observables into a single observable stream.
-	It doesn't cancel or complete inner observables when a new outer value arrives.
-	Useful when you want to process multiple inner observables concurrently.
-    Example use cases: parallel HTTP requests, handling multiple user inputs simultaneously.
 
 switchMap:
 
@@ -926,6 +1144,12 @@ concatMap:
 	It maintains the order of emissions by ensuring that inner observables are processed sequentially.
 	Useful when the order of emissions is important and you want to process one inner observable at a time.
     Example use cases: sequential API requests where the order matters, processing tasks in a queue-like fashion.
+	
+	1)It takes one or more observables as arguments.
+	2)It subscribes to each observable sequentially, waiting for each one to complete before subscribing to the next.
+	3)It emits all the values emitted by the first observable, then emits all the values emitted by the second observable, and so on.
+	4)It completes only when all the concatenated observables complete.
+
 
 
 mergeMap - creates an Observable immediately for any source item, all previous Observables are kept alive. (this was formerly known as flatMap).
@@ -978,13 +1202,11 @@ map and tap in angular
 	
 	The tap operator however takes a data, apply a function to that data but returns the original data, if the function bothered to return a result, tap just ignores it.
 
-SwitchMap & concatMap
-	switchMap only considers the most recent request, ignoring all previous ones. 
-	concatMap processes request one by one, waiting for each to complete before starting the next
 
 
+Why observable is unicast and subject multicast
 
-concat vs exaust vs merge
+	While plain Observables are unicast (each subscribed Observer owns an independent execution of the Observable), Subjects are multicast. A Subject is like an Observable, but can multicast to many Observers. Subjects are like EventEmitters: they maintain a registry of many listeners. Every Subject is an Observable.
 
 	
 

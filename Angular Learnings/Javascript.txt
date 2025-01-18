@@ -119,6 +119,20 @@ Call vs Apply vs Bind
 	call : binds the this value, invokes the function, and allows you to pass a list of arguments. 
 	apply : binds the this value, invokes the function, and allows you to pass arguments as an array. 
 	bind : binds the this value, returns a new function, and allows you to pass in a list of arguments
+	
+	
+	let nameObj = {
+		name: "Tony"
+	}
+
+	let PrintName = {
+		name: "steve",
+		sayHi: function (age) {
+			console.log(this.name + " age is " + age);
+		}
+	}
+
+	PrintName.sayHi.call(nameObj, 42);
 
 Clouser :- 
         
@@ -133,7 +147,7 @@ Clouser :-
 
 Currying
 
-	Currying is a functional programming technique where a function with multiple arguments is transformed into a 	series of functions, each taking a single argument.
+	Currying is a functional programming technique where a function with multiple arguments is transformed into a series of functions, each taking a single argument.
 
 	Instead of taking all arguments at once, the curried function takes the first argument, returns a new function 	that takes the next argument, and so on until all arguments are provided. The final function then returns the 	result.
 
@@ -855,3 +869,26 @@ function saveInput(){
   console.log('Saving data');
 }
 const processChange = debounce(() => saveInput());
+
+
+** write a function to capitalise string in javascript
+
+function capitalizeFirstLetter(val) {
+    const capitalize = String(val).charAt(0).toUpperCase() + String(val).slice(1);
+    console.log(capitalize)
+    return capitalize;
+}
+
+
+/// what will be the output of this Increment operator
+let x = 10;
+console.log(x++); 10
+console.log(x); 11
+
+
+
+let x = 3;
+const y = x++;
+
+console.log(`x:${x}, y:${y}`);
+// Expected output: "x:4, y:3"
