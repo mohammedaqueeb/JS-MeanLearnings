@@ -54,6 +54,23 @@ How to specify optional properties in TypeScript?
 
 What is an unknown type, and when to use it in TypeScript?
 
+	The unknown type represents (just like any) all possible JS values. Every type is assignable to type unknown. Therefore the type unknown is another universal supertype of the type system (alongside any). However, the TS compiler won't allow any operation on values typed unknown. Furthermore, the unknown type is only assignable to the type any. An example will clarify this:
+	
+	let myVar: unknown;
+
+	let myVar1: unknown = myVar;   // No error
+	let myVar2: any = myVar;       // No error
+	let myVar3: boolean = myVar;   // Type 'unknown' is not assignable to type 'boolean'
+
+	// The following operations on myVar all give the error:
+	// Object is of type 'unknown'
+	myVar[0];
+	myVar();
+	myVar.length;
+	new myVar();
+
+
+
 Explain the concept of null and its use in TypeScript.
 	Null refers to a value that is either empty or a value that doesn't exist. It's on purpose that there's no value here. T
 	

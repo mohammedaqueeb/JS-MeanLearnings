@@ -120,6 +120,19 @@ Pipes
 	    return value[0].toUpperCase() + value.substr(1).toLowerCase();
 	  }
 	}
+	
+	Async Pipe
+	
+		
+		when obsarvable failed how we can show result on template using async pipe
+		
+		The async pipe subscribes and unsubscribes and returns the events it receives. You would need to handle the errors before they receive the async pipe. You can use the catch operator and when it returns an observable then its value(s) is emitted by the catch instead of the error.
+		
+		this.myObservable$ = this.myService.myFunc().pipe(
+		  catchError(() => of([])) // this will emit [] if the request fails - you could handle this [] emit on error in the service itself
+		)
+		
+		<div *ngFor="let xxx of (myObservable$ | async)"></div>
 	 
  	 
 
@@ -347,6 +360,13 @@ View Encapsulation
 		1) Emulated :- unique attribute get attached to elements of component
 		2) ShadowDOM :- Other css not affect on component...like style.css will not affect on component
 		3) None :- It will apply over all application.It becomes the global
+		
+	@Component({
+		standalone: true,
+		selector: 'app-no-encapsulation',
+		encapsulation: ViewEncapsulation.None,
+	})
+	export class NoEncapsulationComponent {}
                         
 Router Events:-  
 	Router events in Angular are a set of events that are triggered when the router navigates from one route to another. These events can be used to perform tasks such as logging, tracking, and updating the application's state
@@ -393,9 +413,6 @@ Difference between promise observable angular
 	 observer.complete();
     })
 	
-Difference between formgroup and formarray in angular
-
-	Both Form Group and Form Array are collection of Form Control. The difference is that Form Group aggregates from controls into a object while Form Array aggregates form controls into an array.
 
 Difference between formGroup and formArray angular
 
@@ -501,6 +518,10 @@ debounceTime() &throttleTime() & distinctUntilChanged()
 	If a new item is emitted before the specified time has passed, the previous emission is discarded, and the timer is reset with the new emission.
 	Useful for scenarios such as user input validation, where you want to wait for the user to stop typing before performing an action.
 	
+	this.observable.pipe(debounceTime(500)).subscribe(() => );
+	
+	Throttle time = same as debounceTime but can limit the number of clicks so only 1 goes through every second (prevents button spamming)
+			
     distinctUntilChanged()
 	The distinctUntilChanged() operator filters out consecutive duplicate items emitted by the source observable.
 	If an emitted item is the same as the previously emitted item, it is ignored.
@@ -517,20 +538,6 @@ Design Pattern
 	2)Structural Design Pattern Ex:- Adaptor,Bridge
 	3)Behavioral Design Pattern Ex:- Command,Interpreter,Chain of Resposiblity
 
-
-
-Encapsulation 
-	https://www.youtube.com/watch?v=luXfQYJgrp0
-	https://www.youtube.com/watch?v=ZP_yhOr-41g
-	The process of wrapping properties and functions in a single unit is known as encapsulation
-	@Component({
-		encapsulation: ViewEncapsulation.none 				// By default its value is ViewEncapsulation.Emulated 
-	})
-	
-	Types of view encapsulation
-		Emulated
-		None
-		ShadowDom
 	
 Content Projection
 	Content Projection allows you to insert a shadow Dom in your component. 
@@ -875,6 +882,23 @@ security practices on angular application in angular
 	
 	e).Avoid Eval and InnerHTML: Avoid using eval() and innerHTML as they can introduce security vulnerabilities. Instead, utilize Angular's built-in sanitization mechanisms.
 
+HttpClient
+	
+	The HttpClient is a built-in service in Angular that allows developers to send and receive data between their applications and backend services. It's used to make HTTP requests and handle responses from servers, APIs, and other web services
+	
+	Features 
+	
+	Typed request and response objects: HttpClient provides typed request and response objects.
+	
+	Error handling: HttpClient has streamlined error handling.
+	
+	Interception: HttpClient allows developers to intercept requests and responses.
+	
+	Testability: HttpClient has built-in testability features.
+	
+	RxJS observable-based APIs: HttpClient uses RxJS observable-based APIs
+	
+	
 virtual dom and incremental dom in angular
 
 	virtual DOM (VDOM) and incremental DOM (IDOM) are both used to manage the Document Object Model (DOM), but they differ in how they update the DOM and their performance: 
@@ -1208,7 +1232,13 @@ Why observable is unicast and subject multicast
 
 	While plain Observables are unicast (each subscribed Observer owns an independent execution of the Observable), Subjects are multicast. A Subject is like an Observable, but can multicast to many Observers. Subjects are like EventEmitters: they maintain a registry of many listeners. Every Subject is an Observable.
 
-	
+
+Forkjoin Vs CombineLatest
+
+	forkJoin(): Waits for all streams to complete and then emits their latest values
+
+	combineLatest(): Takes the most recent value from each input observable and emits those values to the observer
+
 
 --------------------------------------------  Unit testing in angular   ----------------------------------------------
 

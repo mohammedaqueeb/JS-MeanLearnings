@@ -25,6 +25,11 @@ What is Javascript
 	The heap is used for memory allocation and the stack holds the execution context
 	
 	
+	JavaScript is a single-threaded language that executes one task at a time.
+	It is an Interpreted language which means it executes the code line by line.
+	The data type of the variable is decided at run-time in JavaScript that’s why it is called dynamically typed.
+	
+	
 What is ES6	
 
 	ES6 is a new standardized version of javascript that was released in 2015. It is also known as ECMAScript 2015. 
@@ -74,8 +79,10 @@ Event queue or Callback queue
 	The event queue is responsible for sending new functions to the stack for processing. It follows the queue data structure to maintain the correct sequence in which all operations should be sent for execution.
 
 SingleTon 
-	https://www.freecodecamp.org/news/singleton-design-pattern-with-javascript/
+
 	Singleton is a design pattern that tells us that we can create only one instance of a class and that instance can be accessed globally.
+	
+	In JavaScript, a singleton is a design pattern that ensures a class only has one instance throughout an application. The singleton instance is the central point of access for all data and methods associated with the class
 	
 State
 	https://www.dofactory.com/javascript/design-patterns/state	
@@ -90,7 +97,11 @@ Promise
 		
 Difference between promise.all, promise.race,  promise.allSettled
 
-	While Promise.all in JavaScript waits for all promises in the iterable to be resolved or rejected 
+	Promise.all : While Promise.all in JavaScript waits for all promises in the iterable to be resolved or rejected 
+
+
+	promise.allSettled : same as Promise.all, Unlike Promise.all(), Promise.allSettled() does not short-circuit when one of the promises is rejected; instead, it waits for all promises to settle, providing information about each one.
+
 	
 	Promise.race returns as soon as one of the promises in the iterable is settled. It's a race to see which promise settles first. This can be useful in scenarios where you only need the result of the first settled promise.
 
@@ -150,10 +161,16 @@ Currying
 	Currying is a functional programming technique where a function with multiple arguments is transformed into a series of functions, each taking a single argument.
 
 	Instead of taking all arguments at once, the curried function takes the first argument, returns a new function 	that takes the next argument, and so on until all arguments are provided. The final function then returns the 	result.
+	
+	function sum(a) {
+		return (b) => {
+			return (c) => {
+				return a + b + c
+			}
+		}
+	}
+	console.log(sum(1)(2)(3)) // 6
 
-callbacks => 
-
-	A callback function is a function passed into another function as an argument, which is then invoked inside the outer function to complete some kind of routine or action.
 
 promises  =>
 
@@ -222,6 +239,21 @@ callback function
 	A callback is a function passed as an argument to another function
 	This technique allows a function to call another function
 	A callback function can run after another function has finished
+	
+	
+	// function
+	function greet(name, callback) {
+		console.log('Hi' + ' ' + name);
+		callback();
+	}
+
+	// callback function
+	function callMe() {
+		console.log('I am callback function');
+	}
+
+	// passing function as an argument
+	greet('Peter', callMe);
 
 
 Difference between normal function and arrow function in javascript
@@ -271,12 +303,7 @@ Generator function in javascript
 
 	console.log(gen.next().value);
 	
-
-bubbling and capturing in javascript
-	(https://javascript.info/bubbling-and-capturing)
-	Event bubbling and capturing are two ways of event propagation in the HTML DOM API, when an event occurs in an element inside another element, 
-	and both elements have registered a handle for that event. The event propagation mode determines in which order the elements receive the event.
-	## event.stopPropagation()
+	
 	
 Pass by value and pass by referance
 	Pass by Value means that when you pass a variable to a function,
@@ -478,6 +505,49 @@ What is an event bubbling in JavaScript?
                 alert("You clicked the parent element!");
             }, false);
     </script>
+	
+	event capturing
+	
+	So, the process of propagating from the farthest element to the closest element in the DOM is called event capturing. Both terms are just opposite of each other.
+
+
+	<div id="grandparent">GrandParent
+		<div id="parent">Parent</div>
+	</div>
+		
+    <script>
+        const grandParent = document.getElementById("grandparent");
+        const parent = document.getElementById("parent");
+        const child = document.getElementById("child");
+         
+        // Changing value of capture parameter as 'true'
+        grandParent.addEventListener("click", (e) => {
+            console.log("GrandParent");
+        }, { capture: true });
+        parent.addEventListener("click", (e) => {
+            console.log("Parent");
+        }, { capture: true });
+    </script>
+
+
+What is event listener
+
+	An event listener is basically a function that waits for an event to occur. That event can be anything like a mouse click event, submitting a form, pressing keys of a keyboard, etc.
+	
+	An event listener contains three parameters and it can be defined using the following syntax.
+
+
+	<element>: The element to which an event listener is attached.
+	<eventName>: It can be ‘click’,’key up’,’key down’ etc. events.
+	<callbackFunction>: This function fires after the event happened.
+	{capture: boolean}: It tells whether the event will be in the capture phase or in the bubbling phase (optional)
+	
+	const grandParent = document.getElementById("grandparent");
+
+	grandParent.addEventListener("click", (e) => {
+		console.log("GrandParent");
+	}, { capture: false });
+
 
 What is map, forEach, filter, reduce, retry, retryWhen etc.
 
@@ -662,6 +732,14 @@ What is the working of timers in JavaScript?
 	setTimeout function
 	setInterval function
 	
+	To clear timers 
+	
+	const myTimeout = setTimeout(function(){ console.log('abc')}, 3000);
+	clearTimeout(myTimeout);
+	
+	consr intervals = setInterval(function () {element.innerHTML += "Hello"}, 1000);
+	clearInterval(interval)
+	
 	
 What is called Variable typing in Javascript?
 
@@ -732,7 +810,15 @@ diffrence between for in & for of
 
 	for of (new in ES6) does use an object-specific iterator and loops over the values generated by that.
 
+	let list = [4, 5, 6];
 
+	for (let i in list) {
+	   console.log(i); // "0", "1", "2",
+	}
+
+	for (let i of list) {
+	   console.log(i); // 4, 5, 6
+	}
 
 what is synchronous and asynchronous in javascript
 
@@ -747,7 +833,7 @@ Difference Between indexOf and findIndex function of array
 
 	both will return the index of array the difference is where we are using it findIndex uses for array of object while index of use in string array
 
-	if dealing with array of objects then use  findIndex();
+	if dealing with array of objects then use findIndex();
 	
 	if its array then use indexOf().
 	
@@ -770,6 +856,12 @@ Nullish coalescing operator (??)
 	} 
 	foo(); // 55 
 	foo(22); // 22
+	
+	
+how to call asyn function when we dont have await
+	An async function can contain an await expression, that pauses the execution of the async function and waits for the passed Promise's resolution, and then resumes the async function's execution and returns the resolved value.
+	
+	if no await is present, the execution is not paused and your code will then be executed synchronously as normal.
 
 ----------------------------------------------------------- tasks ---------------------------------------------
 
