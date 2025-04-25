@@ -34,6 +34,10 @@ What are Interfaces in TypeScript
 
 	Interfaces are a feature of TypeScript that allows us to define the structure or shape of an object and specify the properties and methods that an object has or should have. Their primary function is type checking and aiding developers in catching type-related errors during development.
 	
+	interface User {
+		username: string;
+		email: string;
+	}
 	
 union type in typescript
 
@@ -127,6 +131,11 @@ What is tupple
 	let arrTuple: [number, string, number, string] = [501, "welcome", 505, "Mohan"];
 	
 	console.log(arrTuple);
+	
+	
+	to update the value of tupple we can use arrTuple.push(data);
+	
+	to access value arrTuple[0]
 
 Data Types in TypeScript
 
@@ -146,9 +155,84 @@ What are intersection types?
 What are type assertions in TypeScript?
 	https://www.geeksforgeeks.org/explain-type-assertions-in-typescript/
 	
+	In TypeScript, type assertions allow developers to override the compiler’s inferred type, informing it of the specific type of a value.
+
+	Type assertions are purely compile-time constructs and do not alter the runtime behavior of the code.
+	They are particularly useful when interfacing with APIs or third-party libraries that return values of type any
+	
+	
+	let value: any = "This is a string";
+	let lengthOfString: number = (value as string).length;
+
+	console.log(lengthOfString);
+	
+	
+	A variable value is declared with the type any, which means it can hold any type of value.
+	Using a type assertion (as string), the compiler is informed that the value should be treated as a string.
+	The length property is then accessed safely because the compiler recognizes the value as a string.
+	
 	
 Explain how enums work in TypeScript?
 	https://www.geeksforgeeks.org/how-enums-works-in-typescript/
 	
+	TypeScript enums allow us to define or declare a set of named constants i.e. a collection of related values which could either be in the form of a string or number or any other data type.
+	
+	Reason to use an enum in TypeScript:
+
+	Enums provides a great way to organize the code in TypeScript.
+	Enums saves compile-time and runtime with inline code in JavaScript.
+	Enums allow for the creation of memory-efficient custom constants in JavaScript
+	
+	
+	enum CarName {
+		Honda,
+		Toyota,
+		Alto,
+		Swift,
+	}
+	
+	console.log(CarName);
+	console.log("Value of Alto is : "+ CarName.Alto);
+	Value of Alto is : 2
+	
+	
+	enum with values
+	
+	enum CarName {
+		Honda:4,
+		Toyota:5,
+		Alto:6,
+	}
+	console.log(CarName.Alto);
+	Value of Alto is : 6
+
+	
 Explain the symbol type in TypeScript.
 	https://www.geeksforgeeks.org/explain-the-symbol-type-in-typescript/
+	
+	a symbol is a primitive data type. A primitive data type is not an object, possesses no properties or methods, and cannot be altered. The symbol type is similar to other types such as number, string, and boolean. Symbol values are created using the Symbol constructor.
+	
+	
+	let symbol2 = Symbol("abc");
+    console.log(symbol2);
+	
+	
+	Every symbol is unique
+
+	Every symbol is unique. The below code checks if two symbols are the same but false is returned as we compare two symbols.	
+	
+	
+
+
+let age = 10;
+ 
+let age: number = 10;
+ 
+let x: any = 10;
+x = 'hello';
+console.log(x.toUpperCase());
+ 
+let y: unknown = 10;
+ 
+console.log(y.toFixed(2))
+ 

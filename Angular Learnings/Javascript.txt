@@ -97,11 +97,14 @@ Promise
 		
 Difference between promise.all, promise.race,  promise.allSettled
 
-	Promise.all : While Promise.all in JavaScript waits for all promises in the iterable to be resolved or rejected 
+	
+	Promise.all will reject as soon as one of the Promises in the array rejects.
+	
+	Promise.all([Promise.resolve(1), Promise.resolve(2)]).then(console.log);
 
-
-	promise.allSettled : same as Promise.all, Unlike Promise.all(), Promise.allSettled() does not short-circuit when one of the promises is rejected; instead, it waits for all promises to settle, providing information about each one.
-
+	Promise.allSettled will never reject - it will resolve once all Promises in the array have either rejected or resolved.
+	
+	Promise.allSettled([Promise.resolve(1), Promise.resolve(2)]).then(console.log);
 	
 	Promise.race returns as soon as one of the promises in the iterable is settled. It's a race to see which promise settles first. This can be useful in scenarios where you only need the result of the first settled promise.
 
@@ -144,8 +147,15 @@ Call vs Apply vs Bind
 	}
 
 	PrintName.sayHi.call(nameObj, 42);
+	
+	PrintName.sayHi.Apply(nameObj, [42]);
+	
+	let HiFun = PrintName.sayHi.bind(nameObj);
+	HiFun();
+	
+	
 
-Clouser :- 
+Closure :- 
         
 		1)Function along with it's lexical enviornment forms a closure
 		  
@@ -155,6 +165,11 @@ Clouser :-
 			
 		Disadvantages of closure
 			1. Memory consumption
+			
+
+Closure Memory leaks
+	
+		When the closure is returned and invoked, the data it holds in memory is not destroyed, and it can be accessed in the program at any time, leading to a memory leak
 
 Currying
 
@@ -186,13 +201,36 @@ prototype :-
 		Whenever we create any object,array or function at that time javascript engine attaches one object to that created array or object which contains some prooperties.
               -lets take an example of array when we create array javascript engine attaches on object to that array which haver properties like push,pop.
               -A prototype is an object, where it can add new variables and methods to the existing object
-			  
+
+prototype inheritance 			
+
+		In JavaScript, prototype inheritance allows objects to inherit properties and methods from other objects through a chain of prototypes, enabling code reuse and extensibility. Here's a simple example: 
+		
+		function Animal(name) {
+		  this.name = name;
+		}
+
+		Animal.prototype.speak = function() {
+		  console.log(this.name + " makes a sound.");
+		};
+
 
 difference in = filter , map an reduce
 
 	map: creates a new array by transforming every element in an array individually. 
 	filter: creates a new array by removing elements that don't belong. 
 	reduce: on the other hand, takes all of the elements in an array and reduces them into a single value
+	
+	const array1 = [1, 2, 3, 4];
+
+	// 0 + 1 + 2 + 3 + 4
+	const initialValue = 0;
+	const sumWithInitial = array1.reduce(
+	  (accumulator, currentValue) => accumulator + currentValue,
+	  initialValue,
+	);
+
+	console.log(sumWithInitial);
 
 this keyword :-
 
@@ -256,6 +294,17 @@ callback function
 	greet('Peter', callMe);
 
 
+difference between Callback function VS Higher-order function
+
+	Callback function
+	A function that is passed to another function and executed after a specific task is completed. Callback functions are often used in asynchronous operations, such as handling the completion of an asynchronous task. 
+	
+	
+	Higher-order function
+	A function that takes one or more functions as arguments or returns a function as its result. Higher-order functions allow for the creation of more abstract and reusable code. 
+	
+
+
 Difference between normal function and arrow function in javascript
 	
 	Regular 											| 									Arrow
@@ -301,7 +350,9 @@ Generator function in javascript
 
 	const gen = generator(10);
 
-	console.log(gen.next().value);
+	console.log(gen.next().value); #10
+	console.log(gen.next().value); #20
+	console.log(gen.next().value); #undefined
 	
 	
 	
@@ -358,7 +409,20 @@ Difference between primitive and non primitive data types in javascript
 	  
 Higher order function
 	Basically, a function which takes another function as an argument or returns a function is known as a higher order function
-	
+	another example of Higher order function are (map,filter,forEach,find);
+		
+	// Higher-order function that takes a function as an argument
+	function greet(name, greetingFunction) {
+	  return greetingFunction(name);
+	}
+
+	// Callback function (a function passed as an argument)
+	function sayHello(name) {
+	  return `Hello, ${name}!`;
+	}
+
+	// Call the higher-order function
+	console.log(greet("Alice", sayHello)); // Output: Hello, Alice!
 	
 What is the polyfill in JavaScript
 	A polyfill is a code that implements a feature on a web browser that does not support the feature like a JS library that implements an HTML5 or CSS web standard .
@@ -385,6 +449,8 @@ Function scope and block scope in javascript
 	}
 	greet();
 	
+	OUTPUT : ReferenceError: c is not defined
+	
 	Note: change let c to var c and check what happens
 	
 	1. Output ?
@@ -404,45 +470,6 @@ Function scope and block scope in javascript
 		Hoisting Allowed					Not Hoisting Allowed 					Not Hoisting Allowed
 		Redeclaration Allowed 				Not Redeclaration Allowed 				Not Redeclaration  Allowed
 
-
-Array and Object Destructuring
-	JavaScript destructuring that assigns properties of an array or object to individual variables
-	Destructuring is an efficient way to extract multiple values from data that is stored in arrays or objects
-		
-	=>	var arr = ["Hello", "World"];
-		// destructuring assignment  
-		var [first, second] = arr;  
-		console.log(first); 	// Hello  
-		console.log(second); 	// World  
-		
-	=>	var employee = {    	// Object we want to destructure
-			firstname: 'Jon',
-			lastname: 'Snow',
-			dateofbirth: '1990'
-		};
-		// Destructuring the object into our variables
-		var { firstname, lastname, dateofbirth } = employee;
-		console.log( firstname, lastname, dateofbirth);  		// Jon Snow 1990
-		
-	=> var employee = {    		// Object we want to destructure
-			firstname: 'Jon',
-			lastname: 'Snow',
-			dateofbirth: '1990'
-		};
-		// Destructuring the object into our variables
-		var { fname, lastname, dateofbirth } = employee;
-		console.log( fname, lastname, dateofbirth); 			// undefined Snow 1990
-		
-	=> var employee = {    // Object we want to destructure
-			firstname: 'Jon',
-			lastname: 'Snow',
-			dateofbirth: '1990'
-		};
-		// Destructuring the object into variables with
-		// different names than the object variables
-		var { firstname: fn, lastname: ln, dateofbirth: dob } = employee;
-		console.log( fn, ln, dob); 								// Jon Snow 1990
-	
 What is Destructuring in ES6 ?
 	Destructuring in ES6 is a convenient feature that allows you to extract values from arrays or objects and assign them to variables in a more concise and readable way. It simplifies the process of extracting specific data from complex structures.
 	
@@ -481,6 +508,14 @@ What is an event bubbling in JavaScript?
 
 	How Event Bubbling Works
 	When an event occurs, it starts with the element that triggered the event and then bubbles up to its parent elements, moving up the DOM tree. In bubbling, the event is first captured and handled by the innermost element before it moves outward to the outer elements.
+	
+	
+	To prevent event bubbling, you use the stopPropagation method of the event object.
+	
+	button.addEventListener('click', (event) => {
+	  event.stopPropagation()
+	  console.log("button was clicked")
+	})
 	
 	<div id="parent">
         <button>
@@ -529,13 +564,17 @@ What is an event bubbling in JavaScript?
         }, { capture: true });
     </script>
 
+What is the difference between event.preventDefault() and event.stopPropagation()?
+
+	event.preventDefault() is used to prevent the default action that belongs to the event, such as preventing a form from submitting. 
+	
+	event.stopPropagation() is used to stop the event from bubbling up to parent elements, preventing any parent event handlers from being executed.
 
 What is event listener
 
 	An event listener is basically a function that waits for an event to occur. That event can be anything like a mouse click event, submitting a form, pressing keys of a keyboard, etc.
 	
 	An event listener contains three parameters and it can be defined using the following syntax.
-
 
 	<element>: The element to which an event listener is attached.
 	<eventName>: It can be ‘click’,’key up’,’key down’ etc. events.
@@ -612,12 +651,6 @@ Difference between getElementByID and querySelector in js
 	getElementById matches the id attributes to find DOM nodes, 
 	while querySelector searches by selectors
 
-Difference between primitive and non primitive data types in javascript
-	Primitive data structures are simple and predefined types like integers and booleans, used for basic data storage, 
-		ex : int, float, char, double, boolean, byte, short, long.
-	
-	whereas non-primitive structures like arrays and lists are more complex, designed for organizing collections of data and enabling advanced data manipulation.
-		ex : Arrays, lists, stacks, queues, trees, graphs, sets, maps, classes
 	
 How can you detect the client's browser name?
 	This function will analyze the navigator.userAgent string, which contains information about the user's browser, operating system, and other details. We'll search for specific strings indicative of popular browsers such as Chrome, Firefox, Safari, Edge, Opera, and Internet Explorer.
@@ -723,6 +756,24 @@ What is the ‘Strict’ mode in JavaScript and how can it be enabled?
 	
 	Security: Makes it easier to write “secure” JavaScript
 	
+	The "use strict" directive in JavaScript can only be placed at the beginning of a script or at the beginning of a function body. Placing it in the middle of a script will not have the intended effect, and the code after the directive will not be executed in strict mode. JavaScript engines typically ignore "use strict" directives that are not at the beginning of a script or function.
+	
+	Advantages
+
+	Makes it impossible to accidentally create global variables.
+	Makes assignments which would otherwise silently fail to throw an exception.
+	Makes attempts to delete undeletable properties throw an exception (where before the attempt would simply have no effect).
+	Requires that function parameter names be unique.
+	this is undefined in the global context.
+	It catches some common coding bloopers, throwing exceptions.
+	It disables features that are confusing or poorly thought out.
+	
+	
+	Disadvantages
+
+	Many missing features that some developers might be used to.
+	No more access to function.caller and function.arguments.
+	Concatenation of scripts written in different strict modes might cause issues.
 
 What is the working of timers in JavaScript?
 	A timer is used to execute some task after a particular time interval. Basically, with the help of a timer in JavaScript, we can delay the code execution. With the help of the timer function in JavaScript, we can achieve asynchronous functionality also.
@@ -739,6 +790,9 @@ What is the working of timers in JavaScript?
 	
 	consr intervals = setInterval(function () {element.innerHTML += "Hello"}, 1000);
 	clearInterval(interval)
+	
+	setImmediate(function(){ console.log })
+	
 	
 	
 What is called Variable typing in Javascript?
@@ -811,9 +865,12 @@ diffrence between for in & for of
 	for of (new in ES6) does use an object-specific iterator and loops over the values generated by that.
 
 	let list = [4, 5, 6];
+	
+	let list = {abc:2,efc: 2}
 
 	for (let i in list) {
 	   console.log(i); // "0", "1", "2",
+	   console.log(i); // "abc", "efg"
 	}
 
 	for (let i of list) {
@@ -862,7 +919,247 @@ how to call asyn function when we dont have await
 	An async function can contain an await expression, that pauses the execution of the async function and waits for the passed Promise's resolution, and then resumes the async function's execution and returns the resolved value.
 	
 	if no await is present, the execution is not paused and your code will then be executed synchronously as normal.
+	
 
+why Promise is faster than settimeout 
+
+	Timeouts and Promises both serve to execute code in an asynchronous way but with differences characteristics and purposes:
+
+	setTimeout - Delays the execution of a function by specific time duration. - Does not block the rest of the code execution (asynchronous behavior) - They create Macrotask (browser internal operation)
+
+	Promises - They are a wrapper to allow asynchronous execution of code(Eg: an ajax call). (Does not depend on specific time duration) - They are especially useful to chain different async calls. - Does not block the rest of the code execution (asynchronous behavior) at less you are using the await operator. - They create Microtask (browser internal operation), which have priority over the Macrotask.
+	
+Debounce vs. Throttle
+	
+	Debounce and throttle are both techniques used in JavaScript to control the rate at which a function is executed, particularly in response to frequent events like scrolling, resizing, or user input. However, they achieve this control in different ways, making them suitable for different scenarios. 
+	
+	
+	Debounce:
+	
+		It ensures that a function is only executed after a specified delay has passed since the last time the event was triggered. In other words, it groups multiple sequential calls into a single one. If the event occurs again within the delay period, the timer is reset, and the function execution is postponed until the delay has elapsed without any further events.
+		
+		// Debounce function
+		function debounce(func, delay) {
+		  let timeoutId;
+		  return function(...args) {
+			clearTimeout(timeoutId);
+			timeoutId = setTimeout(() => {
+			  func.apply(this, args);
+			}, delay);
+		  };
+		}
+		
+		
+	Throttle: 
+		
+		It limits the rate at which a function can be executed. It ensures that the function is called at most once within a specified time interval. If the event occurs multiple times during the interval, only the first event will trigger the function, and subsequent events will be ignored until the interval has passed.
+		
+		// Throttle function
+		function throttle(func, limit) {
+		  let inThrottle;
+		  return function(...args) {
+			if (!inThrottle) {
+			  func.apply(this, args);
+			  inThrottle = true;
+			  setTimeout(() => inThrottle = false, limit);
+			}
+		  }
+		}
+
+Can you offer a use case for the new arrow => function syntax?
+	
+	Arrow functions provide a concise syntax for writing functions in JavaScript. They are particularly useful for maintaining the this context within methods and callbacks. For example, in an event handler or array method like map, arrow functions can simplify the code and avoid issues with this binding.
+
+What is Object.freeze() for?
+
+	Object.freeze() is used to make an object immutable. Once an object is frozen, you cannot add, remove, or modify its properties. This is useful for creating constants or ensuring that an object remains unchanged throughout the program.
+	
+	const obj = { name: 'John' };
+	Object.freeze(obj);
+	obj.name = 'Doe'; // This will not change the name property
+	
+	
+What is Object.seal() for?
+
+	Object.seal() is used to prevent new properties from being added to an object and to mark all existing properties as non-configurable. This means you can still modify the values of existing properties, but you cannot delete them or add new ones.
+	
+	const obj = { name: 'John' };
+	Object.seal(obj);
+
+	obj.name = 'Jane'; // Allowed
+	obj.age = 30; // Not allowed
+	delete obj.name; // Not allowed
+	
+	
+What is Object.preventExtensions() for?
+
+	Object.preventExtensions() is a method in JavaScript that prevents new properties from being added to an object. However, it does not affect the deletion or modification of existing properties. This method is useful when you want to ensure that an object remains in a certain shape and no additional properties can be added to it.
+
+	const obj = { name: 'John' };
+	Object.preventExtensions(obj);
+
+	obj.age = 30; // This will not work, as the object is not extensible
+	console.log(obj.age); // undefined
+
+Object.assign()
+	
+	The Object.assign() static method copies all enumerable own properties from one or more source objects to a target object. It returns the modified target object.
+	
+	const target = { a: 1, b: 2 };
+	const source = { b: 4, c: 5 };
+
+	const returnedTarget = Object.assign(target, source);
+
+	console.log(target);
+
+What is the difference between setTimeout(), setImmediate(), and process.nextTick()?
+
+	setTimeout() schedules a callback to run after a minimum delay. setImmediate() schedules a callback to run after the current event loop completes. process.nextTick() schedules a callback to run before the next event loop iteration begins.
+
+	setTimeout(() => console.log('setTimeout'), 0);
+	setImmediate(() => console.log('setImmediate'));
+	process.nextTick(() => console.log('nextTick'));
+	
+Explain how prototypal inheritance works in JavaScript
+	
+	Prototypical inheritance in JavaScript is a way for objects to inherit properties and methods from other objects. Every JavaScript object has a special hidden property called [[Prototype]] (commonly accessed via __proto__ or using Object.getPrototypeOf()) that is a reference to another object, which is called the object's "prototype".
+
+
+	When a property is accessed on an object and if the property is not found on that object, the JavaScript engine looks at the object's __proto__, and the __proto__'s __proto__ and so on, until it finds the property defined on one of the __proto__s or until it reaches the end of the prototype chain.
+
+
+	// Parent object constructor.
+	function Animal(name) {
+	  this.name = name;
+	}
+
+	// Add a method to the parent object's prototype.
+	Animal.prototype.makeSound = function () {
+	  console.log('The ' + this.constructor.name + ' makes a sound.');
+	};
+
+	// Child object constructor.
+	function Dog(name) {
+	  Animal.call(this, name); // Call the parent constructor.
+	}
+
+	// Set the child object's prototype to be the parent's prototype.
+	Object.setPrototypeOf(Dog.prototype, Animal.prototype);
+
+	// Add a method to the child object's prototype.
+	Dog.prototype.bark = function () {
+	  console.log('Woof!');
+	};
+
+	// Create a new instance of Dog.
+	const bolt = new Dog('Bolt');
+
+	// Call methods on the child object.
+	console.log(bolt.name); // "Bolt"
+	bolt.makeSound(); // "The Dog makes a sound."
+	bolt.bark(); // "Woof!"
+	Things to note are:
+
+	.makeSound is not defined on Dog, so the JavaScript engine goes up the prototype chain and finds .makeSound on the inherited Animal.
+	Using Object.create() to build the inheritance chain is no longer recommended. Use Object.setPrototypeOf() instead.
+
+Explain the concept of lexical scoping
+
+	Lexical scoping means that the scope of a variable is determined by its location within the source code, and nested functions have access to variables declared in their outer scope. For example:
+
+	function outerFunction() {
+	  let outerVariable = 'I am outside!';
+
+	  function innerFunction() {
+		console.log(outerVariable); // 'I am outside!'
+	  }
+
+	  innerFunction();
+	}
+
+	outerFunction();
+	In this example, innerFunction can access outerVariable because of lexical scoping
+	
+	
+Set vs Map in JavaScript
+	
+	In JavaScript, Set and Map are two types of objects that are used for storing data in an ordered manner. Both these data structures are used to store distinct types of data inside the same object. In Maps, the data is stored as a key-value pair whereas in Set data is a single collection of values that are unique.
+
+	JavaScript Set
+		
+	It is a collection of values that can be accessed without a specific key. The elements are unique and the addition of duplicates is not allowed. Sets are mostly used to remove duplicates from any other data structure
+
+		let sample = new Set();
+		sample.add("Hello");
+		sample.add(1)
+		sample.add("Bye")
+		sample.add("@");
+		 
+		for (let item of sample) {
+			console.log(item);
+			}
+		
+		OUTPUT
+		
+		Hello
+		1
+		Bye
+		@
+		
+		
+	JavaScript Map
+	
+	Maps are used to store data in key-value pairs where keys are used to uniquely identify an element and values contain the data associated with it.
+	
+	let sample = new Map();
+	sample.set("name", "Ram");
+	sample.set("Role", "SDE")
+	sample.set("Country", "India")
+	 
+	for (let item of sample) {
+		console.log(item);
+	}
+	
+	Output
+	
+	[ 'name', 'Ram' ]
+	[ 'Role', 'SDE' ]
+	[ 'Country', 'India' ]
+	
+
+WeakSet vs WeakMap in JavaScript
+
+	In JavaScript, there are two types of references strong and weak. The WeakSet and WeakMap are called weak references. Since these are weak references they do not prevent garbage collection if they are the only reference to the object in the memory. These objects are rarely used but are useful when we want memory usage to be automatically managed.
+
+	JavaScript WeakSet: It is used to store a collection of objects similar to that of set the only difference is that these values are only object and not some particular data type.
+	
+	var x = new WeakSet();
+	var y = new WeakSet(null);
+	x.add({});
+	x.add({});
+	console.log(x);
+	console.log(y);
+	
+	Output:
+
+	WeakSet {{…}, {…}}
+	WeakSet {}
+	
+	JavaScript WeakMap: In JavaScript, the WeakMap is used to store value in a key-value pair but it is different as the entries are weakly referred to. The key should always be a JavaScript object but the value can be any primitive JavaScript data type.
+	
+	function myGeeks() {
+		var looseMap = new WeakMap();
+		looseMap.set({}, "Ram");
+		looseMap.set({}, "Raj");
+		looseMap.set({}, "Rahul");
+		console.log(looseMap);
+	}
+	myGeeks();
+	
+	Output:
+
+	WeakMap {{…} => 'Raj', {…} => 'Rahul', {…} => 'Ram'}
+	
 ----------------------------------------------------------- tasks ---------------------------------------------
 
 1)
@@ -984,3 +1281,105 @@ const y = x++;
 
 console.log(`x:${x}, y:${y}`);
 // Expected output: "x:4, y:3"
+
+
+
+reverse String 
+
+function reverseString(str) {
+    return str.split("").reverse().join("");
+}
+reverseString("hello");
+
+// with out array 
+
+
+let original = "Hello World";
+let reversed = "";
+
+for (let i = original.length - 1; i >= 0; i--) {
+    reversed += original[i];
+}
+
+console.log(reversed);
+
+
+// flatten Nested Array
+
+function flattenNonRecursion(res) {
+  let i = 0;
+
+  while (i < res.length) {
+    if (Array.isArray(res[i])) {
+      res.splice(i, 1, ...res[i]);
+    }
+    else {
+      i++;
+    }
+  }
+
+  return res;
+}
+
+console.log(flattenNonRecursion([1, 4, [5, [6, [0]]], [[7], 8, 9], 10]));
+
+
+
+///// how to check object is array or not without using Array.isArray(data)
+
+let data = [{name:1,age:2,age1:3}];
+
+
+console.log(data.constructor === Array)
+
+
+/// write a program that give output of str in this format output = [["a",2], ["b",2], ["a",3], ["b",1], ["c",1]];
+
+let str = "aabbaaabc";
+
+
+unsolved program
+
+
+// output = [["a",2], ["b",2], ["a",3], ["b",1], ["c",1]];
+
+	let str = "aabbaaabc";
+	let result = [];
+    let count = 1;
+
+	for (let i = 0; i < str.length; i++) {
+        // If it's the last character or the next character is different
+        if (i === str.length - 1 || str[i] !== str[i + 1]) {
+            // Push the current character and its count to the result array
+            result.push([str[i], count]);
+            count = 1; // Reset count for next character
+        } else {
+            count++; // If the same character, increment the count
+        }
+    }
+	
+
+	console.log(result);
+
+
+show reapted Charcters that count > 1
+
+	let str = 'asdsasdsasdsasdsasdsasdsasdsasdsasdsasddg';
+
+	let charCount = {};
+		
+	// Loop through each character in the string
+	for (let char of str) {
+		// If character is already in charCount, increment the count, otherwise initialize it
+		charCount[char] = charCount[char] ? charCount[char] + 1 : 1;
+	}
+
+
+	let repeatedChars = {};
+	for (let char in charCount) {
+		if (charCount[char] > 1) {
+			repeatedChars[char] = charCount[char];
+		}
+	}
+
+	console.log(repeatedChars)

@@ -1,17 +1,108 @@
-Factory service
+Angular 
 
-javascript
+	Factory service
+	
+	what is Injectors
+	
+	
+	What is Design Pattern
 
-event quent ques and stack for obersable and pormice and call back - javascript
+	1)Creational Design Pattern Ex:- Singleton,Factory
+	2)Structural Design Pattern Ex:- Adaptor,Bridge
+	3)Behavioral Design Pattern Ex:- Command,Interpreter,Chain of Resposiblity
+	
+	@HostBinding
+	@HostListener
+	
+	
+	how to maintain the seqeunce of multiple interceptor and also how to skips any interceptor 
+	why we use httpinterceptor why not any other approache
+	
+	SOLID principle
+	
+	
+	Important
+	
+	if we dont use dependency injection then how we can use service object to our component 
+	
+	what is ControlValueAccessor and DefaultValueAccessor
+	
+	what are the properties in form control
+	
+	what is ng-dirty, ng-prestine
+	
+	remove dublicate from array using any build in function
+	
+	
+
+JavaScript 
+
+	
+
+
+Node js
+
+when calling 4 apis and 2 apis got success and 2 fail and data is been saved in db for data dublicate what we can do 
+
+what is node.js conductor
+
+what libabry uses for seceureauthentication
+
+how to enhance peroformance of SSR application 
+
+how nodejs arctitecure works
+	
+Mongo DB basic 	Question
 
 
 
-how to take values of from singal (array, object, varable) in and show in html template
 
 
 
-combine latest and forkjoin in deatils understanding and comparsion
 
-rxjs map and javascript map operator
+Question before joining ORG
 
-JavaScript Debounce vs. Throttle
+	
+	For Remote
+	
+	Remote Job means permanent Job if policies is been changed to hybrid model in this org then?
+	I Want this to be mentioned in offer letter that you are hiring for permanent remote mode
+	
+	what are the benefits i will get here how many leaves
+	
+	ctc will be fixed or any variable is there
+	
+	what about employer PF , insuarnce & gratuity amount will it deduct from employe CTC
+	
+	
+	For Hybird
+	
+	currently you are offering hybrid 2 Days week WFO, so what about future plans are your organization is going to change the policy?
+	
+	
+	If the policy is not changing will I get any email approval or will it be mentioned on the offer letter that even if the policy is changing I can do 2 days WFO.
+	
+	2 days a week is it on any particular days or any days we can do WFO as a couple day also can we do like (monday tuesday, wednesday thursday)
+	
+	what are the benefits i will get here how many leaves, holidays 
+	
+	ctc will be fixed or any variable is there
+	
+	what about employer PF , insuarnce & gratuity this amount will deduct from employe CTC.	
+	
+	IF WFH : Joining Date 18 | 19 March
+	Not WFH : 3 April
+	
+	location change to hydrebaad
+	
+	
+	Question to be asked 
+	
+	What is bench policy i have seen some bad review of company
+	
+	No hikes for years
+	
+	
+	
+	 
+

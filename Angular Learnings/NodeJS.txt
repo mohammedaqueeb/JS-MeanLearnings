@@ -1,5 +1,12 @@
 https://gist.github.com/paulfranco/9f88a2879b7b7d88de5d1921aef2093b
+
 https://github.com/Mohamed-Hashem/nodejs-interview-questions
+
+
+https://webapplog.com/you-dont-know-node/
+
+
+Complete Node js tutorial on  : 8. First Express.js API
 
 
 What do you mean by Asynchronous API? 
@@ -39,28 +46,13 @@ What's the difference between operational and programmer errors? ☆☆
 	Operation errors are not bugs, but problems with the system, like request timeout or hardware failure. On the other hand programmer errors are actual bugs.
 	
 	
-How to make Post request in Node.js? ☆☆
-	Following code snippet can be used to make a Post Request in Node.js.
-
-	var request = require('request');
-	request.post('http://www.example.com/action', {
-	  form: {
-		key: 'value'
-	  }
-	}, function(error, response, body) {
-	  if (!error && response.statusCode == 200) {
-		console.log(body)
-	  }
-	});
-	
-	
-What are Event Listeners? ☆☆
+What are Event Listeners?
 	Event Listeners are similar to call back functions but are associated with some event. For example when a server listens to http request on a given port a event will be generated and to specify http server has received and will invoke corresponding event listener. Basically, Event listener's are also call backs for a corresponding event.
 
 	Node.js has built in event's and built in event listeners. Node.js also provides functionality to create Custom events and Custom Event listeners.
 	
 	
-What is V8? ☆☆
+What is V8? 
 	The V8 library provides Node.js with a JavaScript engine (a program that converts Javascript code into lower level or machine code that microprocessors can understand), which Node.js controls via the V8 C++ API. V8 is maintained by Google, for use in Chrome.
 
 	The Chrome V8 engine :
@@ -70,5 +62,446 @@ What is V8? ☆☆
 	The V8 engine can run standalone we can embed it with our own C++ program.
 	
 	
-What is libuv? ☆☆
+What is libuv? 
 	libuv is a C library that is used to abstract non-blocking I/O operations to a consistent interface across all supported platforms. It provides mechanisms to handle file system, DNS, network, child processes, pipes, signal handling, polling and streaming. It also includes a thread pool for offloading work for some things that can't be done asynchronously at the operating system level.
+	
+
+	
+What is a blocking code?
+	If application has to wait for some I/O operation in order to complete its execution any further then the code responsible for waiting is known as blocking code.
+	
+
+What is Event Loop?
+	Node.js is a single threaded application but it support concurrency via concept of event and callbacks. As every API of Node js are asynchronous and being a single thread, it uses async function calls to maintain the concurrency. Node uses observer pattern. Node thread keeps an event loop and whenever any task get completed, it fires the corresponding event which signals the event listener function to get executed.
+	
+	
+What is Event Emmitter?
+	All objects that emit events are members of EventEmitter class. These objects expose an eventEmitter.on() function that allows one or more functions to be attached to named events emitted by the object.
+
+	When the EventEmitter object emits an event, all of the functions attached to that specific event are called synchronously.
+
+		const EventEmitter = require('events');
+
+		class MyEmitter extends EventEmitter {}
+
+		const myEmitter = new MyEmitter();
+		myEmitter.on('event', () => {
+		  console.log('an event occurred!');
+		});
+		myEmitter.emit('event');
+		
+		
+What is purpose of Buffer class in Node?
+	Buffer class is a global class and can be accessed in application without importing buffer module. A Buffer is a kind of an array of integers and corresponds to a raw memory allocation outside the V8 heap. A Buffer cannot be resized.
+	
+	
+What is difference between synchronous and asynchronous method of fs module?
+
+	Every method in fs module has synchronous as well as asynchronous form. Asynchronous methods takes a last parameter as completion function callback and first parameter of the callback function is error. It is preferred to use asynchronous method instead of synchronous method as former never block the program execution where the latter one does.
+	
+	
+What are streams?
+	Streams are objects that let you read data from a source or write data to a destination in continuous fashion. In Node.js, there are four types of streams.
+
+	Readable - Stream which is used for read operation.
+	Writable - Stream which is used for write operation.
+	Duplex - Stream which can be used for both read and write operation.
+	Transform - A type of duplex stream where the output is computed based on input.
+	
+	
+What is Chaining in Node? 
+	Chanining is a mechanism to connect output of one stream to another stream and create a chain of multiple stream operations. It is normally used with piping operations.
+	
+	
+When should we use Node.js? 
+	Node.js is well suited for applications that have a lot of concurrent connections and each request only needs very few CPU cycles, because the event loop (with all the other clients) is blocked during execution of a function. I believe Node.js is best suited for real-time applications: online games, collaboration tools, chat rooms, or anything where what one user (or robot? or sensor?) does with the application needs to be seen by other users immediately, without a page refresh.
+	
+	
+How does Node.js handle child threads?
+	Node.js, in its essence, is a single thread process. It does not expose child threads and thread management methods to the developer. Technically, Node.js does spawn child threads for certain tasks such as asynchronous I/O, but these run behind the scenes and do not execute any application JavaScript code, nor block the main event loop.
+
+	If threading support is desired in a Node.js application, there are tools available to enable it, such as the ChildProcess module.
+	
+	
+What are the global objects of Node.js? 
+	These objects are available in all modules:
+
+	process - The process object is a global that provides information about, and control over, the current Node.js process.
+	console - Used to print to stdout and stderr.
+	buffer - Used to handle binary data.
+	
+What is Piping in Node? 
+	Piping is a mechanism to connect output of one stream to another stream. It is normally used to get data from one stream and to pass output of that stream to another stream. There is no limit on piping operations.
+	
+	
+What is the purpose of __filename variable? 
+	The __filename represents the filename of the code being executed. This is the resolved absolute path of this code file. For a main program this is not necessarily the same filename used in the command line. The value inside a module is the path to that module file.
+	
+	
+What is N-API in Node.js?
+	N-API (pronounced N as in the letter, followed by API) is an API for building native Addons. It is independent from the underlying JavaScript runtime (ex V8) and is maintained as part of Node.js itself. This API will be Application Binary Interface (ABI) stable across versions of Node.js. It is intended to insulate Addons from changes in the underlying JavaScript engine and allow modules compiled for one version to run on later versions of Node.js without recompilation.
+	
+	
+Explain usage of NODE_ENV 
+	Node encourages the convention of using a variable called NODE_ENV to flag whether we’re in production right now. This determination allows components to provide better diagnostics during development, for example by disabling caching or emitting verbose log statements. Setting NODE_ENV to production makes your application 3 times faster.
+
+		// Setting environment variables in bash before starting the node process
+		$ NODE_ENV=development
+		$ node
+
+		// Reading the environment variable using code
+		if (process.env.NODE_ENV === “production”)
+			useCaching = true;
+			
+			
+What's the difference between dependencies, devDependencies and peerDependencies in npm package.json file? 
+	dependencies - Dependencies that your project needs to run, like a library that provides functions that you call from your code. They are installed transitively (if A depends on B depends on C, npm install on A will install B and C).
+
+	devDependencies - Dependencies you only need during development or releasing, like compilers that take your code and compile it into javascript, test frameworks or documentation generators. They are not installed transitively (if A depends on B dev-depends on C, npm install on A will install B only).
+
+	peerDependencies - Dependencies that your project hooks into, or modifies, in the parent project, usually a plugin for some other library or tool. It is just intended to be a check, making sure that the parent project (project that will depend on your project) has a dependency on the project you hook into. So if you make a plugin C that adds functionality to library B, then someone making a project A will need to have a dependency on B if they have a dependency on C. They are not installed (unless npm < 3), they are only checked for.
+	
+	
+How do you convert an existing callback API to promises? 
+	How to convert this callback code to Promise? Provide some examples.
+
+	function divisionAPI (number, divider, successCallback, errorCallback) {
+		if (divider == 0) {
+			return errorCallback( new Error("Division by zero") )
+		}
+		successCallback( number / divider )
+	}
+	
+
+	function divisionAPI(number, divider) {
+		return new Promise(function(fulfilled, rejected) {
+			if (divider == 0) {
+				return rejected(new Error("Division by zero"))
+			}
+			fulfilled(number / divider)
+		})
+	}
+
+	// Promise can be used with together async\await in ES7 to make the program flow wait for a fullfiled result
+	
+	async function foo() {
+		var result = await divisionAPI(1, 2); // awaits for a fulfilled result!
+		console.log(result);
+	}
+
+	// Another usage with the same code by using .then() method
+	divisionAPI(1, 2).then(function(result) {
+		console.log(result)
+	})
+	Node.js 8.0.0 includes a new util.promisify() API that allows standard Node.js callback style APIs to be wrapped in a function that returns a Promise.
+
+	const fs = require('fs');
+	const util = require('util');
+
+	const readfile = util.promisify(fs.readFile);
+
+	readfile('/some/file')
+	.then((data) => {
+		/** ... **/ 
+	 })
+	.catch((err) => {
+		/** ... **/ 
+	});
+	
+	
+What is the difference between process.nextTick() and setImmediate() ? 
+	The difference between process.nextTick() and setImmediate() is that process.nextTick() defers the execution of an action till the next pass around the event loop or it simply calls the callback function once the ongoing execution of the event loop is finished whereas setImmediate() executes a callback on the next cycle of the event loop and it gives back to the event loop for executing any I/O operations.
+	
+	
+HTTP request methods
+
+	GET: GET request is used to read/retrieve data from a web server. GET returns an HTTP status code of 200 (OK) if the data is successfully retrieved from the server.
+	
+	POST: POST request is used to send data (file, form data, etc.) to the server. On successful creation, it returns an HTTP status code of 201.
+	
+	PUT: A PUT request is used to modify the data on the server. It replaces the entire content at a particular location with data that is passed in the body payload. If there are no resources that match the request, it will generate one.
+	
+	PATCH: PATCH is similar to PUT request, but the only difference is, it modifies a part of the data. It will only replace the content that you want to update.
+	
+	DELETE: A DELETE request is used to delete the data on the server at a specified location.
+		
+
+Types of http responce code
+
+	100 Series informational response		
+	
+	200 Series success
+	
+		200 OK
+		Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request, the response will contain an entity describing or containing the result of the action.
+		
+		201 Created
+		The request has been fulfilled, resulting in the creation of a new resource.
+		
+		
+		202 Accepted
+		The request has been accepted for processing, but the processing has not been completed. The request might or might not be eventually acted upon, and may be disallowed when processing occurs.
+	
+	300 Series redirection		
+	
+		301 Moved Permanently
+		This and all future requests should be directed to the given URI.
+	
+	400 Series client errors
+	
+		400 Bad Request
+		The server cannot or will not process the request due to an apparent client error (e.g., malformed request syntax, size too large, invalid request message framing, or deceptive request routing).
+	
+	
+		401 Unauthorized
+		Similar to 403 Forbidden, but specifically for use when authentication is required and has failed or has not yet been provided. The response must include a WWW-Authenticate header field containing a challenge applicable to the requested resource. 
+		
+		403 Forbidden
+		The request contained valid data and was understood by the server, but the server is refusing action. This may be due to the user not having the necessary permissions for a resource or needing an account of some sort, or attempting a prohibited action (e.g. creating a duplicate record where only one is allowed). 
+
+		404 Not Found
+		The requested resource could not be found but may be available in the future. Subsequent requests by the client are permissible.
+
+	500 Series server errors
+	
+		500 Internal Server Error
+		A generic error message, given when an unexpected condition was encountered and no more specific message is suitable.
+		
+		
+		502 Bad Gateway
+		The server was acting as a gateway or proxy and received an invalid response from the upstream server.
+		
+		
+what are the common type of module in node js
+
+	Node.js modules facilitate code organization and reusability. Here are the common types of modules in Node.js:
+	
+	Core Modules:
+	These are built-in modules that come with Node.js and provide essential functionalities. Examples include:
+	
+		http: For creating HTTP servers and clients.
+		fs: For file system operations.
+		path: For handling file and directory paths.
+		os: For operating system-related information.
+		url: For URL parsing and manipulation.
+		
+		
+	Local Modules:
+	These are modules created by the user for specific project needs. They are typically organized within the project directory and can be imported using relative paths.
+	
+	
+	Third-Party Modules:
+	
+	These modules are available through the Node Package Manager (NPM) and offer a wide range of functionalities. To use them, they must be installed using npm install <package-name> and then imported using require(). Examples include:
+	
+	
+What are the core modules of Node,js? 
+	
+	http:	creates an HTTP server in Node.js.
+	assert:	set of assertion functions useful for testing.
+	fs:	used to handle file system.
+	path:	includes methods to deal with file paths.
+	process:	provides information and control about the current Node.js process.
+	os:	provides information about the operating system.
+	querystring:	utility used for parsing and formatting URL query strings.
+	url:	module provides utilities for URL resolution and parsing.
+	
+Differnce betweeen http and express
+
+	HTTP is a communication protocol that governs how data is transferred between web servers and clients, 
+	
+	while Express is a Node.js framework that simplifies the process of building web applications by providing a higher level of abstraction for handling HTTP requests, including routing and middleware management, making it easier to structure complex web applications compared to using raw HTTP functionalities alone; essentially, Express sits on top of the basic HTTP functionality to add more features and structure for developers. 
+	
+	Abstraction Level:
+	HTTP is a low-level protocol, meaning developers need to handle many details manually, whereas Express offers a higher level of abstraction, simplifying common web development tasks like routing and middleware handling. 
+	
+	Routing:
+	With HTTP, defining different routes for different requests requires manual URL path parsing, while Express provides dedicated methods to define routes with specific HTTP verbs (GET, POST, PUT, etc.) easily. 
+	
+	Middleware:
+	HTTP does not have built-in middleware support, so developers need to implement it from scratch, while Express allows easy integration of middleware for functionalities like authentication, logging, and error handling. 
+	
+	
+	Using raw HTTP:
+	To handle a GET request on a specific route with raw HTTP, you would need to parse the URL and manually check if it matches the desired path. 
+	
+	Using Express:
+	To achieve the same functionality with Express, you would simply define a route using the app.get() method, specifying the URL path and the function to execute when that route is accessed. 
+	
+	
+What is restfull api
+
+	REST stands for REpresentational State Transfer. REST is a well known software architectural style. It defines how the architecture of a web application should behave. 
+	
+	It facilitates CRUD (Create, Read, Update, Delete) operations on resources, identified by unique URLs, using standard HTTP methods such as GET, POST, PUT, and DELETE. Data is commonly exchanged in JSON format.
+	
+	To build a RESTful API in Node.js, frameworks like Express.js are often utilized to simplify routing, request handling, and middleware integration.
+	
+	
+	Rest means in simple words if you are creating user's API then all curd operation we should do only for /user
+	
+	to Fetch use GET request api /user or /user/1
+	
+	to saved Data use POST request api /user
+	
+	to update Data use PUT/PATCH request api /user/1
+	
+	to delet Data use DELETE request api /user/1
+	
+
+how to auto run node project using nodemon what is nodemon
+
+	nodemon is a tool that helps develop Node.js based applications by automatically restarting the node application when file changes in the directory are detected. nodemon does not require any additional changes to your code or method of development.
+	
+	
+what is controller router model in node js
+
+	In Node.js applications, the Model-Router-Controller (MVC) architectural pattern organizes code into three interconnected parts, each with a specific responsibility:
+	
+	Model:
+	Represents the data structure and interacts with the database. It defines how data is stored, retrieved, updated, and deleted.
+	
+	Router:
+	Handles incoming requests by mapping specific URLs and HTTP methods (GET, POST, PUT, DELETE) to corresponding controller functions. It acts as a dispatcher, directing requests to the appropriate handler.
+	
+	Controller:
+	Contains the business logic for processing requests and generating responses. It receives data from the router, interacts with the model to perform operations, and sends the result back to the client. 
+	
+	
+what is path module
+
+	In programming, particularly in Node.js, the "path module" is a built-in feature that provides utilities for managing and manipulating file and directory paths, allowing developers to easily work with different path formats across various operating systems, ensuring platform independence in their code; essentially, it helps you handle file system paths in a consistent way regardless of the user's operating system. 
+	
+	
+	Key points about the path module:
+
+	Functionality:
+	It offers functions to join paths, resolve relative paths to absolute paths, extract file names, get directory names, and more.
+	
+	Cross-platform compatibility:
+	One of its main advantages is that it automatically adjusts to the file system conventions of the operating system where the code is running, whether it's Windows or Unix-like systems.
+	
+	Accessing the module:
+	To use the path module in Node.js, you simply need to "require" it using const path = require('path');. 
+	
+	
+	const path = require('path');
+
+
+	// Joining paths:
+
+	const filePath = path.join('/home', 'user', 'documents', 'file.txt');
+
+
+
+	// Getting the file name from a path:
+
+	const fileName = path.basename(filePath);
+
+
+
+	// Resolving a relative path:
+
+	const absolutePath = path.resolve('myFile.js'); 
+
+what is __dirname in node js
+
+	__dirname is a special variable in Node.js that resolves to the absolute path of the directory containing the currently executing file. It is commonly used to construct file paths relative to the location of the script. When working with modules, __dirname provides a way to access files within the same directory or its subdirectories without hardcoding absolute paths, making the code more portable and robust.
+	
+	For example, if the file /Users/user/projects/my-app/utils/helper.js contains the line console.log(__dirname), running this file with Node.js will output /Users/user/projects/my-app/utils. This can be useful for tasks such as reading files, loading modules, or defining paths for other operations within the application.
+	
+	
+what is res, req, next
+
+	req and res are objects that represent the incoming HTTP request and the outgoing HTTP response, respectively. They are fundamental for handling client-server communication.
+	
+	
+	req (Request)
+	The req object encapsulates information about the client's request. It provides access to details such as:
+	
+		Headers: Metadata about the request, like the user agent, content type, etc., accessible via req.headers.
+		Parameters: Values extracted from the URL path, available through req.params.
+		Query parameters: Data appended to the URL after a question mark (?), accessible via req.query.
+		Body: Data sent in the request body, often used for POST or PUT requests, accessible via req.body (requires middleware like body-parser).
+		Method: The HTTP method used for the request (e.g., GET, POST, PUT, DELETE), available as req.method.
+		URL: The requested URL, accessible through req.url.
+		
+		
+	res (Response)
+	The res object is used to construct and send the server's response back to the client. It offers methods for: 
+	
+		Sending data: res.send() sends various data types (e.g., text, JSON) as the response body.
+		Setting headers: res.set() or res.header() allows setting custom response headers.
+		Setting status code: res.status() sets the HTTP status code of the response.
+		Redirecting: res.redirect() redirects the client to a different URL.
+		Rendering templates: res.render() renders a view template and sends the resulting HTML as the response.
+		Sending files: res.sendFile() sends a file as an attachment.
+		Ending the response: res.end() closes the response, signaling the end of the data transmission.
+
+
+what is middleware and next()
+ 
+	middleware functions are pivotal in handling requests and responses. They are functions that intercept incoming requests, perform specific operations, and then either terminate the request-response cycle or pass control to the next middleware function.
+	
+	The next function is a crucial element within middleware. It is a callback function that, when invoked, signals the completion of the current middleware's task and triggers the execution of the subsequent middleware in the chain. Without calling next, the request-response cycle would halt, preventing further processing.
+
+
+	Middleware functions can perform various tasks, including:
+	
+	Authentication and authorization: Verifying user credentials and permissions.
+	
+	Logging: Recording request details for debugging or monitoring.
+	
+	Data validation: Ensuring the integrity of incoming data.
+	
+	Error handling: Managing exceptions and providing appropriate responses.
+	
+	Request & Response modification
+	
+	
+	const express = require('express');
+	const app = express();
+
+	// Middleware function to log request details
+	function loggerMiddleware(req, res, next) {
+	  console.log(`Request received: ${req.method} ${req.url}`);
+	  next(); // Pass control to the next middleware or route handler
+	}
+
+	// Apply the middleware to all routes
+	app.use(loggerMiddleware);
+
+	// Route handler
+	app.get('/', (req, res) => {
+	  res.send('Hello, world!');
+	});
+
+	app.listen(3000, () => {
+	  console.log('Server listening on port 3000');
+	});
+	
+	
+what is express.listen and express.configure , express.use, express.json() , express.static , express.router
+
+	express.listen(port, callback):
+	This function binds and listens for connections on the specified port. It starts the server and optionally executes a callback function once the server is running.
+	
+	
+	express.configure():
+	This is deprecated since Express 4.0. Instead, middleware should be applied directly using app.use(). It was previously used to group middleware configurations based on the environment (e.g., development, production).
+	
+	
+	express.use(middleware):
+	This function mounts middleware functions at a specific path or for all paths if no path is specified. Middleware functions have access to the request and response objects and can execute code, modify the request/response, or pass control to the next middleware function in the stack.
+	
+	
+	express.json():
+	This is a built-in middleware function that parses incoming requests with JSON payloads and makes the parsed data available in req.body.
+	
+	
+	express.static(root, [options]):
+	This built-in middleware serves static files such as HTML, CSS, JavaScript, images, etc., from the specified root directory.
+	
+	
+	express.Router():
+	This function creates a new router object, which is an isolated instance of middleware and routes. Routers can be used to modularize routing logic and mount them at specific paths in the main application.

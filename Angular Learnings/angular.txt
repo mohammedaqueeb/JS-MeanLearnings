@@ -2,6 +2,8 @@ https://www.interviewbit.com/angular-interview-questions/
 https://www.interviewbit.com/javascript-interview-questions/
 http://jasonwatmore.com/post/2018/11/16/angular-7-jwt-authentication-example-tutorial
 
+https://testbook.com/interview/angular-scenario-based-interview-questions
+
 
 https://github.com/sudheerj/angular-interview-questions
 
@@ -66,7 +68,7 @@ Property Binding
 
 Service
 	Services in Angular are simply typescript classes with the @injectible decorator. This decorator tells angular that the class is a service and can be injected into components that need that service. They can also inject other services as dependencies
-	service is globel and only one time create its object
+	service is global and only one time create its object
 	An Angular service is a singleton that can be wired with components or other services via Dependency Injection.
 	There are two types of services in angular:
 		a. Built-in services – There are approximately 30 built-in services in angular.
@@ -110,8 +112,8 @@ Pipes
 		
 		
 	1)Pure :- A pure pipe is only called when Angular detects a change in the value or the parameters passed to a pipe.
- 	2)Impure :-An impure pipe is called for every change detection cycle no matter whether the value or parameter(s) changes
-	3) Async Pipe :- The async pipe in Angular is a built-in pipe that's used to automatically subscribe to an Observable or Promise and unwrap the data it emits within your template. 
+ 	2)Impure :-An impure pipe is called for every change detection cycle no matter whether the value or parameter(s) changes.
+	3) Async Pipe :- The async pipe in Angular is a built-in pipe that's used to automatically subscribe to an Observable or Promise and unwrap the data it emits within your template.
 	
 	Custom Pipe
 	
@@ -124,7 +126,7 @@ Pipes
 	Async Pipe
 	
 		
-		when obsarvable failed how we can show result on template using async pipe
+		when observable failed how we can show result on template using async pipe
 		
 		The async pipe subscribes and unsubscribes and returns the events it receives. You would need to handle the errors before they receive the async pipe. You can use the catch operator and when it returns an observable then its value(s) is emitted by the catch instead of the error.
 		
@@ -161,7 +163,30 @@ Directive
 		this.el.nativeElement.style.backgroundColor = 'yellow';
 	  }
 	}
+	
+what is @HostBinding and @HostListener
+	
+	@HostListener - will listen to the event emitted by the host element that's declared with @HostListener.
+
+	HostBinding - Declares a host property binding. Angular automatically checks host property bindings during change detection. If a binding changes, it will update the host element of the directive.
+
+	@HostBinding - will bind the property to the host element, If a binding changes, HostBinding will update the host element.
 		
+	<p appHighlight><p>
+	
+	@Directive({
+	  selector: '[appHighlight]',
+	})
+	export class HighlightDirective  {
+
+	  @HostBinding('style.color') color; 
+
+	  @HostListener('click')
+	  onclick() {
+		this.color =  'blue';
+	  }
+
+	}
 
 Decorators
 	H. Decorators are a design pattern that is used to separate modification or decoration of a class without modifying the original source code.
@@ -221,6 +246,9 @@ Command of AOT
 
 Interceptor
 	Interceptors are a unique type of Angular Service that we can implement. Interceptors allow us to intercept incoming or outgoing HTTP requests using the HttpClient . By intercepting the HTTP request, we can modify or change the value of the request.
+	
+	we can have multiple interceptor in our angular application,  to use multiple interceptors, set the multi: true option when registering them in your NgModule
+	
 	1) Http Interceptors are used to transform or modifty  HttpRequest or HttpResponse at global level.
     2) We can use HTTP interceptor to handel errors gloabally
 	
@@ -228,6 +256,11 @@ Interceptor
 	
 	@NgModule({
 	  providers: [
+		{
+		  provide: HTTP_INTERCEPTORS,
+		  useClass: InterceptorOne,
+		  multi: true,
+		},
 		{
 		  provide: HTTP_INTERCEPTORS,
 		  useClass: InterceptorOne,
@@ -272,6 +305,8 @@ Types of services in angular
 
 ViewChildren and ViewChild
 	The ViewChild or ViewChildren decorators are used to Query and get the reference of the DOM element in the Component. ViewChild returns the first matching element and ViewChildren returns all the matching elements as a QueryList of items. We can use these references to manipulate element properties in the component.
+	
+	with the help of template reference using #id
 
 
 Transfer Data between components
@@ -297,20 +332,54 @@ Difference between reactive and template driven forms
 		Performance: Reactive forms are faster than template-driven forms because they are not reliant on DOM manipulation. 
 		Easier unit testing
 		
+		 profileForm = new FormGroup({
+			firstName: new FormControl(''),
+			lastName: new FormControl(''),
+		 });
+		 
+		
 	Template-driven forms
 		Better for simple scenarios and minimal validation: 
 		Ease of use: Template-driven forms are easy to use and user-friendly. 
 		Minimal code: Template-driven forms require less boilerplate code, making them easier for beginners to understand. 
 		Flexibility: Template-driven forms allow for flexible structures because the template model doesn't need to reflect the TypeScript model. 
 		Unit testing is another challenge
+		
+		component
+		name = "";
+		
+		<input type="text" class="form-control" id="name" required [(ngModel)]="name" name="name">
+		
+		For validation
+		<span class="form-control ng-untouched ng-pristine ng-valid"></span>
+		
+
+Difference between formGroup and formArray angular
+
+	FormArray
+
+	A FormArray is a type of FormControl that represents an array of form controls. It is used to create forms that allow users to enter multiple sets of data, such as a list of items, or a set of item.
+
+	FormGroup
+
+	A FormGroup is a collection of FormControls that are organized into a single object. It is used to create forms that collect related data, such as user profile information, or billing and shipping addresses. A FormGroup can contain any number of FormControls or other FormGroups.
+
+	FormControl
+
+	A FormControl is a single form control element, such as an input, select, or textarea. It is used to create forms that collect a single piece of data, such as a user’s name, email address, or password.
 
 
-form:-
-    1)form Control :- 1)A FormControl represents a single input field in an Angular form.
-                      2)It Tracks the value and validation status of each of these control
-    2)form Group :-FormGroup is a collection of FormControls 
-    3)form Array :-The FormArray allows us to add controls dynamically to the reactive forms.
 
+What is the difference between setValue and patchvalue in angular
+
+	In Angular, the main difference between setValue and patchValue is that setValue sets values for all form controls, while patchValue sets values for some form controls
+	
+	setValue
+		Sets a new value for all controls in a form group. It's useful when you have complete data that matches the form structure. setValue strictly adheres to the form group's structure and replaces the entire value for the control. If the structure doesn't match, Angular will throw an error. 
+	
+	patchValue
+		Sets values for selected or required form controls. It updates only matching values in FormArray/FormControl and ignores the rest. patchValue accepts an object with control names as keys and tries to match the values to the correct controls in the group. It's useful when you don't want to update all the controls of the reactive form, but want to fill partial controls of the form. 
+		
 Difference between Factory and Services
 
 	In Angular, the main difference between a factory and a service is that a factory returns an object literal, while a service is a constructor function that returns an instance of an object:
@@ -326,16 +395,8 @@ Difference between ngIf and hide
 
 	ngIf will comment out the data if the expression is false. This way the data are not even loaded, causing HTML to load faster.
 	[hidden] will load the data and mark them with the hidden HTML attribute. This way data are loaded even if they are not visible.
-
-What is the difference between setValue and patchvalue in angular
-
-	In Angular, the main difference between setValue and patchValue is that setValue sets values for all form controls, while patchValue sets values for some form controls
 	
-	setValue
-		Sets a new value for all controls in a form group. It's useful when you have complete data that matches the form structure. setValue strictly adheres to the form group's structure and replaces the entire value for the control. If the structure doesn't match, Angular will throw an error. 
 	
-	patchValue
-		Sets values for selected or required form controls. It updates only matching values in FormArray/FormControl and ignores the rest. patchValue accepts an object with control names as keys and tries to match the values to the correct controls in the group. It's useful when you don't want to update all the controls of the reactive form, but want to fill partial controls of the form. 
 
 Difference between ng-content, ng-container and ng-template
 
@@ -343,7 +404,7 @@ Difference between ng-content, ng-container and ng-template
 	
    1)<ng-content select="contentName"> :-  ng-content is used to pass html data from one html template to another html template.
                     Basically it's used to reuse the html template.
-                    If we have to show similar html template from differant component at that time we can use ng-content.
+                    If we have to show similar html template from different component at that time we can use ng-content.
 
    2)<ng-container>:- A special element that can hold structural directives without adding new elements to the DOM.
                     This not only increases performance (even so slightly) since the browser ends up rendering less elements but can also be a valuable asset in having cleaner DOMs and styles alike
@@ -368,10 +429,6 @@ View Encapsulation
 	})
 	export class NoEncapsulationComponent {}
                         
-Router Events:-  
-	Router events in Angular are a set of events that are triggered when the router navigates from one route to another. These events can be used to perform tasks such as logging, tracking, and updating the application's state
-	
-	1)NavigationStart 2)NavigationEnd 3)NavigationError
 
 Difference between TypeScript and JavaScript:
 
@@ -386,6 +443,27 @@ Difference between promise observable angular
 	b. the Promise is always asynchronous, while the Observable can be either asynchronous or synchronous,
 	c. the Promise can provide a single value, whereas the Observable is a stream of values (from 0 to multiple values),
 	d. you can apply RxJS operators to the Observable to get a new tailored stream.
+	
+	
+	Difference between Observable and Promise
+
+	Promise
+
+		A Promise handles a single event when an async operation completes or fails.
+	
+	Observable
+
+		An Observable is like a Stream (in many languages) and allows you to pass zero or more events where the callback is called for each event.
+
+		Often Observable is preferred over Promise because it provides the features of Promise and more. With Observable it doesn't matter if you want to handle 0, 1, or multiple events. You can utilize the same API in each case.
+
+		Observable also has the advantage over Promise to be cancellable. If the result of an HTTP request to a server or some other expensive async operation isn't needed anymore, the Subscription of an Observable allows you to cancel the subscription, while a Promise will eventually call the success or failed callback even when you don't need the notification or the result it provides anymore.
+
+		While a Promise starts immediately, an Observable only starts if you subscribe to it. This is why Observables are called lazy.
+
+		Observable provides operators like map, forEach, reduce, ... similar to an array
+
+		Lazy execution allows you to build up a chain of operators before the observable is executed by subscribing, to do a more declarative kind of programming.
 		
 	#promise
 	var promise = new Promise((resolve, reject) => { 
@@ -395,7 +473,7 @@ Difference between promise observable angular
 	promise.then((success) => { 
 		console.log(success); 
 	}) 
-	.catch(function(error) => { 
+	.catch((error) => { 
 		console.log(error); 
 	}); 
 		
@@ -413,27 +491,37 @@ Difference between promise observable angular
 	 observer.complete();
     })
 	
+Router Events:-  
+	
+	Router events in Angular are a set of events that are triggered when the router navigates from one route to another. The Router events allow us to watch for the router state changes and run some custom logic. 
+	
+	It raises several events such as NavigationStart, NavigationEnd, NavigationCancel, NavigationError, ResolveStart, etc. You can listen to these events and find out when the state of the route changes. 
+	
+	One of the use case scenarios is to show the loading indicator when the user navigates from one route to another. You can listen to NavigationStart and NavigationEnd events to achieve this result
+	
+		NavigationStart — This event is triggered when the router starts navigating to a new route. It provides information about the current route and the target route.
 
-Difference between formGroup and formArray angular
+		ChildActivationStart — This event is triggered when the router starts activating the child routes for a given route.
 
-	FormArray
+		ActivationStart — This event is triggered when the router starts activating a route.
 
-	A FormArray is a type of FormControl that represents an array of form controls. It is used to create forms that allow users to enter multiple sets of data, such as a list of items, or a set of item.
+		GuardsCheckEnd — This event is triggered when the router finishes checking the guards for a route.
 
-	FormGroup
+		ActivationEnd — This event is triggered when the router finishes activating a route.
 
-	A FormGroup is a collection of FormControls that are organized into a single object. It is used to create forms that collect related data, such as user profile information, or billing and shipping addresses. A FormGroup can contain any number of FormControls or other FormGroups.
+		ChildActivationEnd — This event is triggered when the router finishes activating the child routes for a given route.
 
-	FormControl
+		NavigationEnd — This event is triggered when the router finishes navigating to a new route.
 
-	A FormControl is a single form control element, such as an input, select, or textarea. It is used to create forms that collect a single piece of data, such as a user’s name, email address, or password.
+		NavigationCancel — This event is triggered when the router cancels the navigation to a new route.
 
-Router events
+		NavigationError — This event is triggered when an error occurs during the navigation process.
+		
 
-	The Router events allow us to watch for the router state changes and run some custom logic. One of the use case scenarios is to show the loading indicator when the user navigates from one route to another. You can listen to NavigationStart and NavigationEnd events to achieve this result
-
-	The Angular Router raises events when it navigates from one route to another route. It raises several events such as NavigationStart, NavigationEnd, NavigationCancel, NavigationError, ResolveStart, etc. You can listen to these events and find out when the state of the route changes. Some of the useful events are route change start ( NavigationStart ) and
-
+	
+	constructor(private router: Router) {
+		this.router.events.pipe( filter((e) => e instanceof NavigationEnd))
+	}
 	
 Route Guards in angular	 
 
@@ -446,9 +534,35 @@ Route Guards in angular
 	There are five different types of guards and each of them is called in a particular sequence. The router’s behavior is modified differently depending on which guard is used. The guards are:
 		CanActivate
 		CanActivateChild
-		CanDeactivate
-		CanLoad
-		Resolve
+		
+		CanDeactivate : Interface that a class can implement to be a guard deciding if a route can be deactivated. If all guards return true, navigation continues. If any guard returns false, navigation is cancelled. If any guard returns a UrlTree, current navigation is cancelled and a new navigation begins to the UrlTree returned from the guard.
+		
+		CanLoad : Interface that a class can implement to be a guard deciding if children can be loaded.
+		
+		Resolve : The resolve guard is a special type of guard that can check for data existence. That means once the router gets the data it allows for navigation.
+		
+		
+		@Injectable({
+		  providedIn: 'root'
+		})
+		export class AuthGuard implements CanActivate {
+
+		  canActivate(): boolean {
+			if (/* your authentication condition */) {
+			  return true;
+			} else {
+			  this.router.navigate(['/login']);
+			  return false;
+			}
+		  }
+		}
+		
+		
+		#in Routing
+		const routes: Routes = [
+		  { path: 'protected', component: ProtectedComponent, canActivate: [AuthGuard] },
+		  // ...
+		];
                   
 Annotation and Controller
 
@@ -510,6 +624,16 @@ Change Detection
 			this.cd.detectChanges();
 		  }
 		}
+		
+		
+		The biggest difference between the two is that detectChanges() actually triggers change detection, while markForCheck() doesn't trigger change detection.
+		
+		detectChanges
+		This one is used to run change detection for the tree of components starting with the component that you trigger detectChanges() on. So the change detection will run for the current component and all its children.
+
+
+		cd.markForCheck() 
+		will not run change detection, but mark its ancestors as needing to run change detection. Next time change detection runs anywhere, it will run also for those components which were marked.
 
 debounceTime() &throttleTime() & distinctUntilChanged()
 
@@ -532,7 +656,7 @@ Authentication and authorization
 
 	Authentication verifies the identity of users, while authorization determines what actions they can perform within the application
 	
-Design Pattern
+What is Design Pattern
 
 	1)Creational Design Pattern Ex:- Singleton,Factory
 	2)Structural Design Pattern Ex:- Adaptor,Bridge
@@ -552,26 +676,11 @@ Content Projection
 	<ng-content select=".className"> show all element that match classname </ng-comtent>
 	<ng-content select="#idName"> show all element that match id </ng-comtent>
 	
-	
-difference between promise and observable in javascript
-	
-	Promise: A Promise is a JavaScript object that links producing code and consuming code.
-		
-	Observables												| 		Promises
-		
-	: Emit multiple values over a period of time. 					Emit a single value at a time.
-	: Are lazy: they’re not executed until we subscribe to    		Are not lazy: execute immediately after creation.
-	  them using the subscribe() method.
-	: Have subscriptions that are cancellable using the  			Are not cancellable.
-	  unsubscribe() method, which stops the listener from 
-	  receiving further values.
-	: Provide the map for forEach, filter, reduce, retry, and  		Don’t provide any operations.
-	  retryWhen operators
-	: Deliver errors to the subscribers.	 						Push errors to the child promises.
+
 
 How to create a custom observable
 
-	 const myObservables = Observable.create((observer: Observer<string>) => {
+	 const myObservables = new Observable((observer: Observer<string>) => {
 		observer.next('FIRST RESPONSE****:');
 		observer.next('SECOND RESPONSE****:');
 		observer.error('ERROR RESPONSE****:') // if you want to show error
@@ -670,8 +779,8 @@ TrackByFunction
 	
 	method of trackby
 	identify(index, item){
-		 return item.name; 
-	  }
+		return item.name; 
+	}
 	
 
 budget in angular
@@ -699,30 +808,11 @@ refresh token
 	Generally has a longer lifespan than access tokens.
 	Stored securely on the client-side.
 	
-
-Difference between Observable and Promise
-
-	Promise
-
-		A Promise handles a single event when an async operation completes or fails.
-	
-	Observable
-
-		An Observable is like a Stream (in many languages) and allows you to pass zero or more events where the callback is called for each event.
-
-		Often Observable is preferred over Promise because it provides the features of Promise and more. With Observable it doesn't matter if you want to handle 0, 1, or multiple events. You can utilize the same API in each case.
-
-		Observable also has the advantage over Promise to be cancellable. If the result of an HTTP request to a server or some other expensive async operation isn't needed anymore, the Subscription of an Observable allows you to cancel the subscription, while a Promise will eventually call the success or failed callback even when you don't need the notification or the result it provides anymore.
-
-		While a Promise starts immediately, an Observable only starts if you subscribe to it. This is why Observables are called lazy.
-
-		Observable provides operators like map, forEach, reduce, ... similar to an array
-
-		Lazy execution allows you to build up a chain of operators before the observable is executed by subscribing, to do a more declarative kind of programming.
-	
 	
 
 Microfrontend
+
+	https://medium.com/@gurunadhpukkalla/implementing-microfrontends-in-angular-15-35c4d2307e36
 
 	In Angular, the term "micro front-end" refers to the architectural strategy of dividing a large, massive Angular application into more manageable, independent front-end modules. Each module can be built, deployed, and maintained independently, and each represents a particular feature or functionality of the program.
 	
@@ -776,7 +866,7 @@ What are the differences between Angular decorator and annotation?
 
 	Although Annotations and Decorators both share the same @ symbol in Angular, they both are different language features.
 	
-	Annotations: These are hard-coded language feature. Annotations are only metadata set on the class that is used to reflect the metadata library.
+	Annotations: These are hard-coded language feature. Annotations are only metadata set on the class that is used to reflect the metadata library. annotations are a way to add metadata to classes or class members using special decorators, essential for defining components, services, directives, and other building blocks of an Angular application
 		
 	decorator is a function that adds metadata to a class, its members, or its method arguments. A decorator is just a function that gives you access to the target that needs to be decorated.
 	
@@ -812,6 +902,25 @@ What is NgZone?
 	runOutsideAngular :- Executes code outside of the Angular zone. This is useful for code that doesn't need Angular's change detection or when optimizing performance for tasks that don't affect the UI. 
 	
 	NgZone wraps asynchronous browser APIs and notifies consumers when an asynchronous task has started or ended. This includes XHR calls, setTimeout(), and user events like click, submit, and mousedown
+	
+	  constructor(private ngZone: NgZone) { } [1, 2, 4];
+
+	  doSomethingHeavy() {
+
+		this.ngZone.runOutsideAngular(() => {
+
+		  // Perform heavy computation here, not triggering change detection
+
+		  // ... 
+
+		  // Once done, re-enter the Angular zone to update the UI
+
+		  this.ngZone.run(() => {
+
+			// Update UI elements here
+		  });
+		});
+	  }
 	
 Why we need zone js in Angular?
 	Zone. js is a crucial library in Angular that simplifies the handling of asynchronous operations. It creates a context or "zone" to keep track of these operations, ensuring Angular's change detection system works efficiently.
@@ -948,6 +1057,8 @@ How to create cache in angular
 
 Signals
 	
+	https://www.freecodecamp.org/news/angular-signals/
+	
 	
 	Signals in Angular are a reactivity model that allows developers to manage state and reactivity in a more efficient and predictable way. Signals are a new feature in Angular that was introduced in Angular 18
 	
@@ -973,7 +1084,40 @@ Signals
 	// Output:
 	// John JOHN
 	// Jane JANE
+	
+	To read the signal, first open the box using parentheses: name()
+	
+	to change the value of signal use set method name.set("aqueeb")
+	
 
+what are Writable signals: 
+	
+	provide an API for updating their values directly. You create writable signals by calling the signal function with the signal's initial value: 
+		const count = signal(0);
+	
+	To change the value of a writable signal, either .set() it directly:  count.set(3); 
+	
+	or use the .update() operation to compute a new value from the previous one: count.update(value => value + 1);
+	
+	
+what are Computed signals : 
+		
+	Computed signal are read-only signals that derive their value from other signals. You define computed signals using the computed function and specifying a derivation:
+	
+		const count: WritableSignal<number> = signal(0);
+		const doubleCount: Signal<number> = computed(() => count() * 2);
+		
+	The doubleCount signal depends on the count signal. Whenever count updates, Angular knows that doubleCount needs to update as well.
+	
+what are  Effects : 
+	
+	Signals are useful because they notify interested consumers when they change. An effect is an operation that runs whenever one or more signal values change. You can create an effect with the effect function:
+	
+		effect(() => {
+		  console.log(`The current count is: ${count()}`);
+		});
+	
+	Effects always run at least once. When an effect runs, it tracks any signal value reads. Whenever any of these signal values change, the effect runs again. Similar to computed signals, effects keep track of their dependencies dynamically, and only track signals which were read in the most recent execution.
 
 Signals and Change Detection
 
@@ -1018,13 +1162,6 @@ Angular 17 New feature
 	6. Signals: using signals we can manage our state
 	7. Build is faster: in 17 build in create by the use of es build on the place webpack
 	
-
-New Feature in angular 14
-	https://www.youtube.com/watch?v=IqaurE0LXPI
-	Standalone Component: he biggest advantage of standalone components is that they’re easier to customize
-	Angular CLI Auto-Completion: 
-	Strictly Typed Forms: 
-	Improved Template Diagnostics: 
 	
 	
 	
@@ -1102,6 +1239,16 @@ What is ngrx
 	  }
 	}
 
+
+difference between a library and framework
+
+	A library is a collection of pre-written code that performs specific tasks, while a framework is a set of pre-written code that provides a structure for building applications. 
+	
+	Libraries
+	Developers can use libraries to perform specific tasks, such as communicating with databases, managing user input, or producing graphics. 
+
+	Frameworks
+	Frameworks provide a structure for building applications, including a common set of conventions for building and maintaining the code. 
 
 
 ---------------------------------------------------------- RXJS  ----------------------------------------------------------
@@ -1206,6 +1353,9 @@ What is Subject
 What is BehaviorSubject
 	Behavior Subject is similar to subject but only difference is that we can set the initial value .
 
+async subject vs replay subject 
+	
+	Use a ReplaySubject when you need more than the last given value. (For example, the previous five values) Or you want to set a time window for the values can be validly sent to subscribers. Use an AsyncSubject when you only want the last value to be passed to the subscribers.
 
 what is retry(), or replay() operators
 
@@ -1239,6 +1389,12 @@ Forkjoin Vs CombineLatest
 
 	combineLatest(): Takes the most recent value from each input observable and emits those values to the observer
 
+
+Differnce between form and of operator
+
+	of will emit all values at once
+
+	from will emit all values one by one
 
 --------------------------------------------  Unit testing in angular   ----------------------------------------------
 

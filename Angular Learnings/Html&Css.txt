@@ -12,7 +12,7 @@ different types of Selectors in CSS
 
 What is the difference between inline, inline-block, and block?
 	Block Element: The block elements always start on a new line. They will also take space for an entire row or width. List of block elements are <div>, <p>.
-	Inline Elements: Inline elements don't start on a new line, they appear on the same line as the content and tags beside them. Some examples of inline elements are <a>, <span> , <strong>, and <img> tags. 
+	Inline Elements: Inline elements don't start on a new line, they appear on the same line as the content and tags beside them. Some examples of inline elements are <a>, <span> , <strong>, and <img> tags.
 	Inline Block Elements: Inline-block elements are similar to inline elements, except they can have padding and margins and set height and width values
 
 What are Pseudo elements and Pseudo classes
@@ -69,16 +69,81 @@ CSS Flexbox
 	Flexbox Components:
 		Flex Container: The parent div containing various divisions.
 		Flex Items: The items inside the container div.
+		
+		
+		<div id="productShowcaseContainer">
+		  <div id="productShowcaseTitle"></div>
+
+		  <div class="contentContainer"> <!-- Added wrapper -->
+			<div id="productShowcaseDetail"></div>
+			<div id="productShowcaseThumbnailContainer"></div>
+		  </div>
+		</div>
+		
+		
+		styles 
+		
+			#productShowcaseContainer {
+			  display: flex;
+			  flex-direction: column;
+			  height: 600px;
+			  width: 580px;
+			}
+
+			.contentContainer {
+			  display: flex;
+			  flex: 1;
+			}
+
+			#productShowcaseTitle {
+			  height: 100px;
+			  background-color: silver;
+			}
+
+			#productShowcaseDetail {
+			  flex: 3;
+			  background-color: lightgray;
+			}
+
+			#productShowcaseThumbnailContainer {
+			  flex: 2;
+			  background-color: black;
+			}
 	
 Display flex
 	https://www.geeksforgeeks.org/introduction-to-css-flexbox/
 
 
-Responsive websites
 
+In how many ways can we add CSS to our HTML file?
 
+	Inline CSS: Inline CSS contains the CSS property in the body section attached with the element known as inline CSS. This kind of style is specified within an HTML tag using the style attribute.
+	
+	Internal or Embedded CSS: This can be used when a single HTML document must be styled uniquely. The CSS ruleset should be within the HTML file in the head section i.e the CSS is embedded within the HTML file.
+	
+	External CSS: External CSS contains a separate CSS file which contains only style property with the help of tag attributes (For example class, id, heading, … etc). CSS property is written in a separate file with .css extension and should be linked to the HTML document using the link tag. This means that for each element, style can be set only once and that will be applied across web pages.
 
----------------------------- html  ------------------------------------------
+What are CSS Selectors?
+	CSS Selectors: CSS Selectors are used to selecting HTML elements based on their element name, id, attributes, etc. It can select one or more elements simultaneously.
+	
+What is the difference between CSS border and outline?
+	CSS border properties allow us to set the style, color, and width of the border.
+	CSS outline property allows us to draw a line around the element, outside the border.
+	
+	
+	
+	
+
+differnce between visibility hidden and display none;
+
+	display:none means that the tag in question will not appear on the page at all (although you can still interact with it through the dom). There will be no space allocated for it between the other tags.
+
+	visibility:hidden means that unlike display:none, the tag is not visible, but space is allocated for it on the page. The tag is rendered, it just isn't seen on the page.
+	
+	opacity:0 causes the elements to be very transparent but users can still interact with them.
+		
+
+----------------------------------- html  ------------------------------------------
 
 
 
@@ -93,13 +158,35 @@ what is DOCTYPE
 
 
 how to declare html version 4 in html page 
-	
+
+
+What are tags and attributes in HTML?
+
+	Tags are the primary component of the HTML that defines how the content will be structured/ formatted, whereas Attributes are used along with the HTML tags to define the characteristics of the element. For example, <p align=” center”>Interview questions</p>, in this the ‘align’ is the attribute using which we will align the paragraph to show in the center of the view.
+
+
+What are void elements in HTML?
+	HTML elements which do not have closing tags or do not need to be closed are Void elements. For Example <br />, <img />, <hr />, <link>, <meta> etc.
 
 
 what is HTML Web Storage API
 	HTML web storage provides two objects for storing data on the client: 
 		window.localStorage - stores data with no expiration date. 
+				localStorage.setItem
+				localStorage.getItem
+				localStorage.removeItem();
+				
+				
 		window.sessionStorage - stores data for one session (data is lost when the browser tab is closed)
+		
+				sessionStorage.setItem
+				sessionStorage.getItem
+				sessionStorage.removeItem();			
+				
+
+		Cookies : Cookies are data, stored in small text files, on your computer. When a web server has sent a web page to a browser, the connection is shut down, and the server forgets everything about the user.
+		
+		document.cookie = "username=John Smith; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
 
 
 what is MetaData
@@ -116,24 +203,179 @@ why semantic elements introduced
 	
 	Semantic elements enhance the user experience for all visitors. 
 	
-	A Guide to Semantic Tags in HTML - Shiksha Online
 	Semantic elements provide a structured and meaningful way to describe content. For example, the strong element indicates strong importance, not bold. 
+	
+	<article>
+	<aside>
+	<details>
+	<figcaption>
+	<figure>
+	<footer>
+	<header>
+	<main>
+	<mark>
+	<nav>
+	<section>
+	<summary>
+	<time>
 
-how to create 24 bit grid in bootstrap
+What are HTML Entities?
 
-	Unfortunately, there is no customization tool in Bootstrap 4 so custom build is a necessary step.
+	In HTML some characters are reserved like ‘<’, ‘>’, ‘/’, etc. To use these characters in our webpage we need to use the character entities called HTML Entities. Below are a few mapping between the reserved character and its respective entity character to be used.
 
-	But don't worry, it's quite easy.
+	Character		Entity Name			Entity Number
+	<				&lt;				&#60;
+	>				&gt;				&#62;
+	&				&amp;				&#38;
+	
+	
+What is the difference between the ‘id’ attribute and the ‘class’ attribute of HTML elements?
 
-	Follow instructions from this answer - https://stackoverflow.com/a/47251052/1614120 (you'll need Node.js installed)
-	Put following code in the name.scss (file mentioned in 5th step):
-	name.scss
+	Multiple elements in HTML can have the same class value, whereas a value of id attribute of one element cannot be associated with another HTML element.
 
-	@import "bootstrap/scss/functions";
-	@import "bootstrap/scss/variables";
-	@import "bootstrap/scss/mixins";
+Define multipart form data?
 
-	// Set this value to 16, 24, etc. depending on how many columns you need.
-	$grid-columns: 24;
+	Multipart form data is one of the values of the enctype attribute. It is used to send the file data to the server-side for processing. The other valid values of the enctype attribute are text/plain and application/x-www-form-urlencoded.
 
-	@import "bootstrap/scss/grid";
+
+Describe HTML layout structure.
+
+	Every web page has different components to display the intended content and a specific UI. But still, there are few things which are templated and are globally accepted way to structure the web page, such as:
+
+	<header>: Stores the starting information about the web page.
+	<footer>: Represents the last section of the page.
+	<nav>: The navigation menu of the HTML page.
+	<article>: It is a set of information.
+	<section>: It is used inside the article block to define the basic structure of a page.
+	<aside>: Sidebar content of the page
+
+
+What is the difference between <strong>, <b> tags and <em>, <i> tags?
+
+	The effect on a normal webpage of the tags <strong>, <b>  and <em>, <i> is the same. <b> and <i> tags stands for bold and italic. These two tags only apply font styling and bold tag <b>, just adds more ink to the text, these tags don't say anything about the text.
+
+	Whereas, <strong> and <em> tags represent that the span of text is of strong importance or more importance and emphatic stress respectively than the rest of the text. These tags have semantic meaning
+	
+	
+How is Cell Padding different from Cell Spacing?
+	Cell Spacing is the space or gap between two consecutive cells. Whereas, Cell Padding is the space or gap between the text/ content of the cell and the edge/ border of the cell. Please refer to the above figure example to find the difference
+	
+	
+	
+What is the difference between <figure> tag and <img> tag?
+	The <figure> tag specifies the self-contained content, like diagrams, images, code snippets, etc. <figure> tag is used to semantically organize the contents of an image like image, image caption, etc., whereas the <img> tag is used to embed the picture in the HTML5 document.
+
+
+----------------------------------- SCSS  ------------------------------------------
+
+
+Explain what is Sass?
+
+	When stylesheets are getting larger, more complex, and harder to maintain. This is where a CSS pre-processor can help. Sass (which stands for 'Syntactically awesome style sheets) is an extension of CSS that enables you to use things like variables, nested rules, inline imports and more. It also helps to keep things organised and allows you to create style sheets faster.
+
+	Sass works by writing your styles in .scss (or .sass) files, which will then get compiled into a regular CSS file. The newly compiled CSS file is what gets loaded to your browser to style your web application. This allows the browser to properly apply the styles to your web page.
+	
+What are the SCSS basic features?
+
+	Variables :
+	
+		Variables are useful for things like colors, fonts, font sizes, and certain dimensions, as you can be sure always using the same ones. Variables in SCSS start with $ sign
+		
+		$font-stack:    Helvetica, sans-serif;
+		$primary-color: #333;
+
+		body {
+		  font: 100% $font-stack;
+		  color: $primary-color;
+		}
+		
+	Nesting : 
+	
+		Basic nesting refers to the ability to have a declaration inside of a declaration.
+
+		nav {
+		  ul {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			
+			li { display: inline-block; }
+		  }
+		  
+		}
+		
+	Modules : 
+		
+		This rule loads another Sass file as a module, which means we can refer to its variables, mixins, and functions in our Sass file with a namespace based on the filename. Using a file will also include the CSS it generates in your compiled output!
+		
+		if we have a style file with name base.scss we use this scss file in another scss file using 
+		
+		@use 'base';
+		
+		
+	Mixins : 
+		
+		A mixin provide to make groups of CSS declarations that you want to reuse throughout your site. You can even pass in values to make your mixin more flexible.
+		
+		@mixin A mixin lets you make groups of CSS declarations that you want to reuse throughout your site
+
+
+		
+		@mixin transform($property) {
+		  -webkit-transform: $property;
+		  -ms-transform: $property;
+		  transform: $property;
+		}
+		.box { @include transform(rotate(30deg)); }
+
+	
+	Inheritance : 
+		
+		Using @extend lets you share a set of CSS properties from one selector to another.
+		
+		@extend directive provides a simple way to allow a selector to inherit/extend the styles of another one.
+
+		%placeholder are classes that aren’t output when your SCSS is compiled (%message-shared)
+
+		
+		%message-shared {
+		  border: 1px solid #ccc;
+		  padding: 10px;
+		  color: #333;
+		}
+
+		.message {
+		  @extend %message-shared;
+		}
+
+
+
+Why Sass is considered better than LESS?
+
+
+	Saas allows you to write reusable methods and use logic statements, e., loops, and conditionals
+	
+	Saas user can access Compass library and use some awesome features like dynamic sprite map generation, legacy browser hacks * and cross-browser support for CSS3 features
+	
+	Compass also allows you to add an external framework like Blueprint, Foundation or Bootstrap on top
+	
+	In LESS, you can write a basic logic statement using a ‘guarded mixin’, which is equivalent to Sass if statements
+	
+	In LESS, you can loop through numeric values using recursive functions while Sass allows you to iterate any kind of data
+	
+	In Sass, you can write your own handy functions
+	
+	
+What are Sass, Less, and Stylus? Why do people use them? How does something like Compass relate to Sass?
+
+	They are CSS preprocessors. They are an abstraction layer on top of CSS. They are a special syntax/language that compile down into CSS. They make managing CSS easier, with things like variables and mixins to handle vendor prefixes (among other things). They make doing best practices easier, like concatenating and compressing CSS.
+	
+	
+	
+What is the difference between SCSS and SASS?
+
+	The main difference between SCSS and SASS is the syntax. SCSS (Sassy CSS) is a CSS pre-processor that uses the syntax of CSS, while SASS (Syntactically Awesome Style Sheets) uses the syntax of the Ruby programming language.
+
+	SCSS is a superset of CSS, meaning that any valid CSS code is valid SCSS code. SCSS is more popular than SASS because it is easier to learn and use for developers who are already familiar with CSS. It also allows developers to write code that is more concise and easier to read.
+
+	SASS is a more powerful language than SCSS, and it allows developers to write code that is more complex and powerful. It also has more features than SCSS, such as mixins, variables, and nesting. However, it is more difficult to learn and use for developers who are not familiar with the Ruby programming language.
